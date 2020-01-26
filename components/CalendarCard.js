@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
   }
 })
 
-export const CalendarCard = props => (
+export const CalendarCard = ({children}) => (
   <LinearGradient colors={[...gradients.darkGrey]}  style={styles.root}>
-    <Text style={{fontWeight:"bold", color:colors.success}}>26TH December</Text>
+    {children}
   </LinearGradient>
 )
