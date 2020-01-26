@@ -15,5 +15,14 @@ export const radii = {
 }
 
 export const spacing = {
-  screenSides: 30,
+  screenSides: 40,
+}
+
+export const fontSizes = {
+    xxl:108,
+    xl:96,
+    lg:48,
+    md:32,
+    sm:16,
+    xs:10
 }
