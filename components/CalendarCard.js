@@ -5,18 +5,19 @@ import {
   View,
   Text,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import {colors,gradients} from "../configStyles";
+import {colors, spacing, radii} from "../configStyles";
 
 const styles = StyleSheet.create({
   root:{
-    backgroundColor:"green",
-    height:500,
+    borderRadius:radii.large,
+    backgroundColor:colors.incompleteGrey,
+    margin:spacing.screenSides,
+    height: 500
   }
 })
 
 export const CalendarCard = ({children}) => (
-  <LinearGradient colors={[...gradients.darkGrey]}  style={styles.root}>
+  <View  style={styles.root}>
     {children}
-  </LinearGradient>
+  </View>
 )

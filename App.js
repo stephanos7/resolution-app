@@ -15,7 +15,10 @@ import {colors} from "./configStyles";
 const App = () => {
   return (
     <ScreenView>
-      <Text style={{fontWeight:"bold", color:"red"}}>26TH December</Text>
+      <CalendarCard>
+      <Text>sup w?</Text>
+
+        </CalendarCard>
     </ScreenView>
     // <>
     //   <StatusBar barStyle="light-content" />
