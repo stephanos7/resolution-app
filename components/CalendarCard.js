@@ -5,15 +5,17 @@ import {
   View,
   Text,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const styles = StyleSheet.create({
   root:{
-    backgroundColor:"green"
+    backgroundColor:"green",
+    height:500
   }
 })
 
 export const CalendarCard = props => (
-  <View style={styles.root}>
+  <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}  style={styles.root}>
     <Text>26TH December</Text>
-  </View>
+  </LinearGradient>
 )
