@@ -10,12 +10,12 @@ import {
 
 
 import { CalendarCard } from './components/CalendarCard';
-
+import {colors} from "./configStyles";
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
+      <StatusBar barStyle="light-content" />
+      <SafeAreaView style={{backgroundColor:colors.secondaryBlack}}>
         <View>
           <Text>hello w</Text>
           <CalendarCard />
