@@ -6,31 +6,32 @@ import {
 import moment from "moment";
 
 import { CalendarCard } from "./components/CalendarCard";
-import {ScreenView} from "./components/ScreenView"
-
+import {ScreenView} from "./components/ScreenView";
+import {CalendarView} from "./components/CalendarView";
 const App = () => {
-  const [currentDay, setCurrentDay] = useState();
-  const [currentMonth, setCurrentMonth] = useState();
+  const [currentDate, setCurrentDate] = useState();
 
-  const getDay = () => {
-    const day = moment().format("D");
-    return setCurrentDay(day);
+  const getCurrentDate = () => {
+    const now = moment()
+    // const day = moment().format("D");
+
+    return setCurrentDate(now);
   }
 
-  const getMonth = () => {
-    const month = moment().format("MMMM");
-    return setCurrentMonth(month);
-  }
+  // const getMonth = () => {
+  //   const month = moment().format("MMMM");
+  //   return setCurrentMonth(month);
+  // }
 
   useEffect(() => {
-    getDay();
-    getMonth();
+    getCurrentDate();
   }, [])
   return (
     <>
       <StatusBar barStyle="light-content" />
       <ScreenView>
-        <CalendarCard day={currentDay} month={currentMonth}/>
+      {/* <CalendarView /> */}
+        <CalendarCard currentDate={currentDate}/>
       </ScreenView>
     </>
   );

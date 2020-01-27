@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import moment from "moment";
 import {colors, spacing, radii} from "../configStyles";
 import { CalendarDate } from './CalendarDate';
 
@@ -19,8 +20,13 @@ const styles = StyleSheet.create({
   }
 })
 
-export const CalendarCard = ({day = 1, month="DECEMBER"}) => (
+export const CalendarCard = ({currentDate=""}) => {
+  const formattedDay = moment(currentDate).format("D");
+  const formattedMonth = moment(currentDate).format("MMMM").toUpperCase()
+  
+  return(
   <View  style={styles.root}>
-    <CalendarDate day={day} month={month}/>
+    <CalendarDate day={formattedDay} month={formattedMonth}/>
   </View>
-)
+  )
+}
