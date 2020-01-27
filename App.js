@@ -13,15 +13,9 @@ const App = () => {
 
   const getCurrentDate = () => {
     const now = moment()
-    // const day = moment().format("D");
-
     return setCurrentDate(now);
   }
 
-  // const getMonth = () => {
-  //   const month = moment().format("MMMM");
-  //   return setCurrentMonth(month);
-  // }
 
   useEffect(() => {
     getCurrentDate();
@@ -30,8 +24,8 @@ const App = () => {
     <>
       <StatusBar barStyle="light-content" />
       <ScreenView>
-      {/* <CalendarView /> */}
-        <CalendarCard currentDate={currentDate}/>
+      <CalendarView currentDate={currentDate}/>
+        {/* <CalendarCard currentDate={currentDate}/> */}
       </ScreenView>
     </>
   );
