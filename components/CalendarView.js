@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import moment from "moment";
 import {Calendar, CalendarList} from 'react-native-calendars';
+import { colors, fontSizes } from '../configStyles';
 
 export const CalendarView = ({currentDate}) => {
   const currentFormattedDate = moment(currentDate).format("YYYY-MM-DD")
@@ -19,7 +20,7 @@ export const CalendarView = ({currentDate}) => {
       // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
       minDate={'2020-01-01'}
       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-      maxDate={endOfYear}
+      maxDate={currentFormattedDate}
       // Handler which gets executed on day press. Default = undefined
       onDayPress={(day) => {console.log('selected day', day)}}
       // Handler which gets executed on day long press. Default = undefined
@@ -53,19 +54,19 @@ export const CalendarView = ({currentDate}) => {
       disableArrowRight={true}
 
       theme={{
-        backgroundColor: '#ffffff',
+        // backgroundColor: '#ffffff',
         calendarBackground: 'transparent',
-        textSectionTitleColor: '#b6c1cd',
+        textSectionTitleColor: '#ffffff',
         selectedDayBackgroundColor: '#00adf5',
         selectedDayTextColor: '#ffffff',
         todayTextColor: '#00adf5',
-        dayTextColor: '#2d4150',
-        textDisabledColor: '#d9e1e8',
+        dayTextColor: "#ffffff",
+        textDisabledColor: colors.incompleteGrey,
         dotColor: '#00adf5',
         selectedDotColor: '#ffffff',
-        arrowColor: 'orange',
-        disabledArrowColor: '#d9e1e8',
-        monthTextColor: 'blue',
+        // arrowColor: 'orange',
+        // disabledArrowColor: '#d9e1e8',
+        monthTextColor: colors.white,
         indicatorColor: 'blue',
         // textDayFontFamily: 'monospace',
         // textMonthFontFamily: 'monospace',
@@ -73,8 +74,8 @@ export const CalendarView = ({currentDate}) => {
         textDayFontWeight: '300',
         textMonthFontWeight: 'bold',
         textDayHeaderFontWeight: '300',
-        textDayFontSize: 16,
-        textMonthFontSize: 26,
+        textDayFontSize: fontSizes.sm,
+        textMonthFontSize: fontSizes.md,
         textDayHeaderFontSize: 16
       }}
   />
