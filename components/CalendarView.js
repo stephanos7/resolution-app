@@ -13,7 +13,9 @@ export const CalendarView = ({navigation, currentDate}) => {
     `${moment().year()}-12-31`
   const endOfYear = getEndOfYear()
   const handlePress = (day) =>  navigation.navigate('Day',{day})
-
+  const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
+  const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
+  const workout = {key:'workout', color: 'green'};
   return(
     <CalendarList
       scrollEnabled={true}
@@ -54,6 +56,15 @@ export const CalendarView = ({navigation, currentDate}) => {
       disableArrowLeft={true}
       // Disable right arrow. Default = false
       disableArrowRight={true}
+      // need this prop to have multiple markers on a date
+      markingType={'multi-dot'}
+
+      markedDates={{
+        '2020-01-25': {dots: [vacation, massage, workout], selected: true, selectedColor: 'red'},
+        '2020-01-26': {dots: [massage, workout], disabled: true}
+      }}
+
+      
 
       theme={{
         // backgroundColor: '#ffffff',
