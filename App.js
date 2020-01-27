@@ -3,16 +3,20 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import {LoadingScreen} from "./screens/LoadingScreen";
 import {CalendarScreen} from "./screens/CalendarScreen";
 import {DayScreen} from "./screens/DayScreen";
 import { colors } from './configStyles';
+import { LoginScreen } from './screens/LoginScreen';
 
 const AppNavigator = createStackNavigator({
+  Loading: LoadingScreen,
+  Login:LoginScreen,
   Day : DayScreen,
   Calendar: CalendarScreen,
   },
   {
-    initialRouteName: 'Calendar',
+    initialRouteName: 'Loading',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: colors.secondaryBlack,

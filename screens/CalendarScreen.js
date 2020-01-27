@@ -16,7 +16,7 @@ export const CalendarScreen = ({navigation}) => {
   }
 
   useEffect(() => {
-    getCurrentDate();
+    return getCurrentDate();
   }, [])
 
   return (
