@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
   }
 })
 
-export const CalendarCard = ({currentDate=""}) => {
-  const formattedDay = moment(currentDate).format("D");
-  const formattedMonth = moment(currentDate).format("MMMM").toUpperCase()
-  
+export const CalendarCard = ({selectedDate=""}) => {
+  const formattedDay = moment(selectedDate.timestamp).format("D")
+  const formattedMonth = moment(selectedDate.timestamp).format("MMMM")
+
   return(
   <View  style={styles.root}>
     <CalendarDate day={formattedDay} month={formattedMonth}/>
   </View>
   )
-}
+} 

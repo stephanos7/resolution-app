@@ -7,11 +7,13 @@ import moment from "moment";
 import {Calendar, CalendarList} from 'react-native-calendars';
 import { colors, fontSizes } from '../configStyles';
 
-export const CalendarView = ({currentDate}) => {
+export const CalendarView = ({navigation, currentDate}) => {
   const currentFormattedDate = moment(currentDate).format("YYYY-MM-DD")
   const getEndOfYear = () => 
     `${moment().year()}-12-31`
   const endOfYear = getEndOfYear()
+  const handlePress = (day) =>  navigation.navigate('Day',{day})
+
   return(
     <CalendarList
       scrollEnabled={true}
@@ -22,7 +24,7 @@ export const CalendarView = ({currentDate}) => {
       // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
       maxDate={currentFormattedDate}
       // Handler which gets executed on day press. Default = undefined
-      onDayPress={(day) => {console.log('selected day', day)}}
+      onDayPress={handlePress}
       // Handler which gets executed on day long press. Default = undefined
       onDayLongPress={(day) => {console.log('selected day', day)}}
       // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting

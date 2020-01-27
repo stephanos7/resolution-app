@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {
   StatusBar,
-  Text
 } from 'react-native';
 import moment from "moment";
 
-// import { CalendarCard } from "./components/CalendarCard";
 import {ScreenView} from "../components/ScreenView";
 import {CalendarView} from "../components/CalendarView";
 
-export const CalendarScreen = props => {
+export const CalendarScreen = ({navigation}) => {
   const [currentDate, setCurrentDate] = useState();
 
   const getCurrentDate = () => {
@@ -25,8 +23,7 @@ export const CalendarScreen = props => {
     <>
     <StatusBar barStyle="light-content" />
       <ScreenView>
-      <CalendarView currentDate={currentDate}/>
-      {/* <CalendarCard currentDate={currentDate}/> */}
+      <CalendarView navigation={navigation } currentDate={currentDate}/>
     </ScreenView>
   </>
   )
