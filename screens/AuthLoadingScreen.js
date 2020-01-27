@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import {Text} from "react-native"
 import {ScreenView} from "../components/ScreenView";
 
-export const LoadingScreen = ({navigation}) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+export const AuthLoadingScreen = ({navigation}) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLoggedIn = (theIsLoggedIn) => {
     if(isLoggedIn){
