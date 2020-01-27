@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 export const CalendarCard = ({selectedDate=""}) => {
   const formattedDay = moment(selectedDate.timestamp).format("D")
   const formattedMonth = moment(selectedDate.timestamp).format("MMMM")
-
+    
   return(
   <View  style={styles.root}>
     <CalendarDate day={formattedDay} month={formattedMonth}/>

@@ -16,6 +16,9 @@ export const CalendarView = ({navigation, currentDate}) => {
   const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
   const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
   const workout = {key:'workout', color: 'green'};
+  const otherone = {key:'otherone', color: 'yellow'};
+  const othertwo = {key:'othertwo', color: 'purple'};
+  const otherthree = {key:'otherthree', color: 'white'};
   return(
     <CalendarList
       scrollEnabled={true}
@@ -61,7 +64,7 @@ export const CalendarView = ({navigation, currentDate}) => {
 
       markedDates={{
         '2020-01-25': {dots: [vacation, massage, workout], selected: true, selectedColor: 'red'},
-        '2020-01-26': {dots: [massage, workout], disabled: true}
+        '2020-01-26': {dots: [massage, workout, otherone, otherthree, othertwo, vacation], disabled: true}
       }}
 
       
