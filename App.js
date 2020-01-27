@@ -1,34 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import {
-  StatusBar,
-  Text
-} from 'react-native';
-import moment from "moment";
+import React from 'react';
+// import moment from "moment";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import { CalendarCard } from "./components/CalendarCard";
-import {ScreenView} from "./components/ScreenView";
-import {CalendarView} from "./components/CalendarView";
-const App = () => {
-  const [currentDate, setCurrentDate] = useState();
+import {CalendarScreen} from "./screens/CalendarScreen";
+import {DayScreen} from "./screens/DayScreen";
+import { colors } from './configStyles';
 
-  const getCurrentDate = () => {
-    const now = moment()
-    return setCurrentDate(now);
-  }
+const AppNavigator = createStackNavigator({
+  Day : DayScreen,
+  Calendar: CalendarScreen,
+  },
+  {
+    initialRouteName: 'Calendar',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.secondaryBlack,
+        borderBottomWidth: 0,
+        shadowColor: 'transparent'
+      },
+      headerTintColor: colors.white,
+      headerTitleStyle: {
+        fontWeight: 'normal',
+      },
+    },
+  });
 
+const AppContainer = createAppContainer(AppNavigator);
 
-  useEffect(() => {
-    getCurrentDate();
-  }, [])
-  return (
-    <>
-      <StatusBar barStyle="light-content" />
-      <ScreenView>
-      <CalendarView currentDate={currentDate}/>
-        {/* <CalendarCard currentDate={currentDate}/> */}
-      </ScreenView>
-    </>
-  );
-};
+const app = () =>( <AppContainer />)
 
-export default App;
+export default app
