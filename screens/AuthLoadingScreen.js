@@ -44,7 +44,14 @@ export const AuthLoadingScreen = ({navigation}) => {
   return (
     <ScreenView>
       <Text style={{color:"white", fontWeight:"bold"}}>LOADING SCREEN. Checking if user is logged-in</Text>
-      <Button onPress={signIn} title="Login" color={"blue"} />
+      {/* <Button onPress={signIn} title="Login" color={"blue"} /> */}
+      <GoogleSigninButton
+        style={{ width: 192, height: 48 }}
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Light}
+        onPress={signIn}
+        // disabled={this.state.isSigninInProgress} 
+        />
     </ScreenView>
   )
 }
