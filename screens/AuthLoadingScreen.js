@@ -2,6 +2,12 @@ import React, {useEffect, useState} from "react";
 import {Text, Button} from "react-native"
 import {ScreenView} from "../components/ScreenView";
 
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-community/google-signin';
+
 export const AuthLoadingScreen = ({navigation}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
