@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Text} from "react-native"
+import {Text, Button} from "react-native"
 import {ScreenView} from "../components/ScreenView";
 
 export const AuthLoadingScreen = ({navigation}) => {
@@ -8,8 +8,6 @@ export const AuthLoadingScreen = ({navigation}) => {
   const handleLoggedIn = (theIsLoggedIn) => {
     if(isLoggedIn){
       return navigation.navigate("Calendar",{user:"stephos"})
-    }else{
-      return navigation.navigate("Login")
     }
   }
 
@@ -20,6 +18,7 @@ export const AuthLoadingScreen = ({navigation}) => {
   return (
     <ScreenView>
       <Text style={{color:"white", fontWeight:"bold"}}>LOADING SCREEN. Checking if user is logged-in</Text>
+      <Button onPress={() => alert("yo")} title="Login" color={"blue"} />
     </ScreenView>
   )
 }

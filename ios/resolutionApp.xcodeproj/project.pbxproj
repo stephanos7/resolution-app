@@ -17,6 +17,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* resolutionAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* resolutionAppTests.m */; };
 		42A12BA44EF0E239B846647F /* libPods-resolutionApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C86CA38608D3D31C508E8B89 /* libPods-resolutionApp-tvOSTests.a */; };
+		BB2B4B6723E317DA009E6523 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2B4B6623E317DA009E6523 /* GoogleService-Info.plist */; };
 		C65C0F615F8910758D782815 /* libPods-resolutionApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA60FAB1447EF73467B4AC6B /* libPods-resolutionApp-tvOS.a */; };
 		E06DE534C42A8CFE4F48850D /* libPods-resolutionApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4964FA0338BE8D89CAE094F7 /* libPods-resolutionApp.a */; };
 		E743120FD47A72691FEB0247 /* libPods-resolutionAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E2A47B80BEB80D3AB37B799 /* libPods-resolutionAppTests.a */; };
@@ -57,6 +58,8 @@
 		4964FA0338BE8D89CAE094F7 /* libPods-resolutionApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-resolutionApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A6ECC72552EEC5EC72EACB6 /* Pods-resolutionApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-resolutionApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-resolutionApp-tvOSTests/Pods-resolutionApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E2A47B80BEB80D3AB37B799 /* libPods-resolutionAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-resolutionAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB2B4B6623E317DA009E6523 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BB2B4B6823E317E6009E6523 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C86CA38608D3D31C508E8B89 /* libPods-resolutionApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-resolutionApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA60FAB1447EF73467B4AC6B /* libPods-resolutionApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-resolutionApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFB185F6B70D247EF0206EFB /* Pods-resolutionApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-resolutionApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-resolutionApp-tvOS/Pods-resolutionApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +128,7 @@
 		13B07FAE1A68108700A75B9A /* resolutionApp */ = {
 			isa = PBXGroup;
 			children = (
+				BB2B4B6823E317E6009E6523 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -161,7 +165,6 @@
 				E8BF08D7BD194FA5B7E3EB70 /* Pods-resolutionAppTests.debug.xcconfig */,
 				446F81209902B463C0CD2811 /* Pods-resolutionAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +178,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				BB2B4B6623E317DA009E6523 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* resolutionApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* resolutionAppTests */,
@@ -230,6 +234,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				383A2B2C9762AD3CACF8E335 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -308,6 +313,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -338,6 +344,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				BB2B4B6723E317DA009E6523 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +414,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		383A2B2C9762AD3CACF8E335 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-resolutionApp/Pods-resolutionApp-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-resolutionApp/Pods-resolutionApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8D933705B3E0030D0173D0A2 /* [CP] Check Pods Manifest.lock */ = {
