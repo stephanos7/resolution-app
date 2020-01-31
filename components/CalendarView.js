@@ -31,13 +31,18 @@ export const CalendarView = ({navigation, currentDate}) => {
 
     // TEST AREA
 
-    const enumerateDaysBetweenDates = (startDate, endDate, exponent) => {
-      let now = startDate.clone().format(), dates = [];
+    const createDateMarkersAtIntervals = (startDate, endDate, interval, ...dots) => {
+      let now = startDate.clone(), dates = {}
   
       while (now.isSameOrBefore(endDate)) {
-          let formattedNow = now.format(calendarDateFormat)
-          dates.push(formattedNow);
-          now.add(exponent, 'days');
+          let formattedNow = now.format(calendarDateFormat) 
+          Object.defineProperty(dates,formattedNow, {
+            value: {dots:[...dots]},
+            writable: true,
+            enumerable: true,
+            configurable: true
+          });
+          now.add(interval, 'days');
           console.log(dates)
       }
       return dates;
@@ -55,8 +60,11 @@ const activityToPlay = ["2020-05-26","2020-05-27","2020-05-29"];
 
 // const allDaysOfYear = 
 // enumerateDaysBetweenDates(startOfYear, endOfYear)
-
-const createResolutionMarker = () =>  null
+// const createDateMarker = (inputForKey) => {
+//   let marker = {}
+//   marker[`${inputForKey}`] = {dots: [], disabled: true}
+//   console.log(marker)
+// }
 const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
   const dayToCheckAgainst = startingDate.clone()
   const possibleDayNames = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
@@ -70,9 +78,12 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
   }
   console.log(dayToCheckAgainst)
 }
-getTheFirstDayYouNameInTheYear("Monday", startOfYear)
+// getTheFirstDayYouNameInTheYear("Monday", startOfYear)
 
-// enumerateDaysBetweenDates(start2,end2,7)
+
+
+
+const dateMarkers = createDateMarkersAtIntervals(start2,end2,7,resolutionPresent, incomplete)
 
 // END OF TEST AREA
 
@@ -120,8 +131,7 @@ getTheFirstDayYouNameInTheYear("Monday", startOfYear)
       markingType={'multi-dot'}
 
       markedDates={{
-        '2020-01-25': {dots: [resolutionPresent], selected: true, selectedColor: 'green'},
-        '2020-01-26': {dots: [], disabled: true}
+        ...dateMarkers
       }}
 
       
