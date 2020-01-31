@@ -9,38 +9,72 @@ import { colors, fontSizes } from '../configStyles';
 
 export const CalendarView = ({navigation, currentDate}) => {
   const calendarDateFormat = "YYYY-MM-DD"
-  const currentFormattedDate = moment(currentDate).format(calendarDateFormat)
-  const getEndOfYear = () => 
-    `${moment().year()}-12-31`
+  const currentFormattedDate = moment(currentDate).utc().format(calendarDateFormat)
+  const getEndOfYear = () => {
+    const currentYear = moment().year()
+    return moment(`${currentYear}-12-31`).utc()
+    // .format(calendarDateFormat)
+  }
+  const getStartOfYear = () => {
+    const currentYear = moment().year()
+    return moment(`${currentYear}-01-01`).utc()
+    // .format(calendarDateFormat)
+  }
+
   const endOfYear = getEndOfYear()
+  const startOfYear = getStartOfYear();
   const handlePress = (day) =>  navigation.navigate('Day',{day})
-  const vacation = {key:'vacation', color: 'red', selectedDotColor: 'blue'};
-  const massage = {key:'massage', color: 'blue', selectedDotColor: 'blue'};
-  const workout = {key:'workout', color: 'green'};
-  const otherone = {key:'otherone', color: 'yellow'};
-  const othertwo = {key:'othertwo', color: 'purple'};
-  const otherthree = {key:'otherthree', color: 'white'};
+  const resolutionPresent = {key:'resolutionPresent', color: 'yellow'};
+  const incomplete = {key:'incomplete', color: 'white'};
+  const missed = {key:'missed', color: 'red'};
+
 
     // TEST AREA
 
-    const enumerateDaysBetweenDates = (startDate, endDate) => {
-      let now = startDate.clone(), dates = [];
+    const enumerateDaysBetweenDates = (startDate, endDate, exponent) => {
+      let now = startDate.clone().format(), dates = [];
   
       while (now.isSameOrBefore(endDate)) {
-          dates.push(now.format(calendarDateFormat));
-          now.add(1, 'days');
+          let formattedNow = now.format(calendarDateFormat)
+          dates.push(formattedNow);
+          now.add(exponent, 'days');
+          console.log(dates)
       }
-      console.log(dates);
+      return dates;
   };
   
-  const start = moment("2021-05-26")
-  const end = moment("2021-06-01")
+   
+  const start1 = moment("2020-05-26")
+  const end1 = moment("2020-06-01")
+  const start2 = moment("2020-05-26")
+  const end2 = moment("2020-06-29")
 
+// const activity1 = enumerateDaysBetweenDates(start1,end1)
+// const activity2 = enumerateDaysBetweenDates(start2,end2)
+const activityToPlay = ["2020-05-26","2020-05-27","2020-05-29"];
 
-console.log("RUNNING TEST:::::::")
-enumerateDaysBetweenDates(start,end)
+// const allDaysOfYear = 
+// enumerateDaysBetweenDates(startOfYear, endOfYear)
 
+const createResolutionMarker = () =>  null
+const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
+  const dayToCheckAgainst = startingDate.clone()
+  const possibleDayNames = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+  if(possibleDayNames.includes(nameOfDay)){
+    while (!(dayToCheckAgainst.format("dddd") === nameOfDay) ){
+      dayToCheckAgainst.add(1,"days");
+      console.log(dayToCheckAgainst, dayToCheckAgainst.format("dddd"))
+    }
+  }else{
+    return false
+  }
+  console.log(dayToCheckAgainst)
+}
+getTheFirstDayYouNameInTheYear("Monday", startOfYear)
 
+// enumerateDaysBetweenDates(start2,end2,7)
+
+// END OF TEST AREA
 
   return(
     <CalendarList
@@ -86,8 +120,8 @@ enumerateDaysBetweenDates(start,end)
       markingType={'multi-dot'}
 
       markedDates={{
-        '2020-01-25': {dots: [vacation, massage, workout], selected: true, selectedColor: 'red'},
-        '2020-01-26': {dots: [massage, workout, otherone, otherthree, othertwo, vacation], disabled: true}
+        '2020-01-25': {dots: [resolutionPresent], selected: true, selectedColor: 'green'},
+        '2020-01-26': {dots: [], disabled: true}
       }}
 
       
