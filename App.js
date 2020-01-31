@@ -13,7 +13,7 @@ const AppStack = createStackNavigator({
   Calendar: CalendarScreen,
   },
   {
-    // initialRouteName: 'Loading',
+    initialRouteName: 'Calendar',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: colors.secondaryBlack,

@@ -3,12 +3,13 @@ import {
   StatusBar,
   Text
 } from 'react-native';
-import moment from "moment";
+import moment, { calendarFormat } from "moment";
 import {Calendar, CalendarList} from 'react-native-calendars';
 import { colors, fontSizes } from '../configStyles';
 
 export const CalendarView = ({navigation, currentDate}) => {
-  const currentFormattedDate = moment(currentDate).format("YYYY-MM-DD")
+  const calendarDateFormat = "YYYY-MM-DD"
+  const currentFormattedDate = moment(currentDate).format(calendarDateFormat)
   const getEndOfYear = () => 
     `${moment().year()}-12-31`
   const endOfYear = getEndOfYear()
@@ -19,6 +20,28 @@ export const CalendarView = ({navigation, currentDate}) => {
   const otherone = {key:'otherone', color: 'yellow'};
   const othertwo = {key:'othertwo', color: 'purple'};
   const otherthree = {key:'otherthree', color: 'white'};
+
+    // TEST AREA
+
+    const enumerateDaysBetweenDates = (startDate, endDate) => {
+      let now = startDate.clone(), dates = [];
+  
+      while (now.isSameOrBefore(endDate)) {
+          dates.push(now.format(calendarDateFormat));
+          now.add(1, 'days');
+      }
+      console.log(dates);
+  };
+  
+  const start = moment("2021-05-26")
+  const end = moment("2021-06-01")
+
+
+console.log("RUNNING TEST:::::::")
+enumerateDaysBetweenDates(start,end)
+
+
+
   return(
     <CalendarList
       scrollEnabled={true}
