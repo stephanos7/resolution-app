@@ -5,7 +5,7 @@ import {
 import {spacing} from "../configStyles";
 
 const styles = StyleSheet.create({
-  horizontalMargins : {
+  root : {
     flex:1,
     margin:spacing.screenSides,
   }
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 })
 
 export const LayoutView = ({children}) => (
-    <View style={styles.horizontalMargins} >
+    <View style={styles.root} >
       {children}
     </View>
 )

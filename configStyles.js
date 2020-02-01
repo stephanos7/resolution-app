@@ -22,7 +22,8 @@ export const gradients = {
 }
 
 export const radii = {
-  large: 12, 
+  large: 12,
+  button: 8
 }
 
 export const spacing = {

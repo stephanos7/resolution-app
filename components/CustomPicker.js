@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import {
   StyleSheet, Picker
 } from 'react-native';
-import {spacing, colors} from "../configStyles";
+import {fontSizes, colors} from "../configStyles";
 
 const styles = StyleSheet.create({
   pickerContainer : {
@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   pickerItem:{
     color:colors.neonCyan,
     fontWeight:"bold",
+    fontSize:fontSizes.sm
   }
   // bottomSafeArea:{
   //   flex:1,
@@ -19,31 +20,18 @@ const styles = StyleSheet.create({
 })
 
 
-export const CustomPicker = props => {
+export const CustomPicker = ({items = []}) => {
   const [selectedValue, setSelectedValue] = useState("thursday")
-  const checkIfSelected = (nameOfDay, selected) => nameOfDay === selected ? true : false
-  const handlePress = () => console.log("yo who scrolled?")
   return (
   <Picker
-    onChange={handlePress}
     mode={"dropdown"}
     selectedValue={selectedValue}
     style={styles.pickerContainer}
     itemStyle={styles.pickerItem}
-    onValueChange={
-      (itemValue, itemIndex, itemSelected) =>{
-        console.log("is selected>", itemSelected)
-      return setSelectedValue(itemValue)}
-    }
-    >
-    <Picker.Item  label="Day" value="day" />
-    <Picker.Item  label="Monday" value="monday" />
-    <Picker.Item  label="Tuesday" value="tuesday"/>
-    <Picker.Item  label="Wednesday" value="wednesday"  />
-    <Picker.Item  label="Thursday" value="thursday"  />
-    <Picker.Item  label="Friday" value="friday"  />
-    <Picker.Item  label="Saturday" value="saturday"  />
-    <Picker.Item  label="Sunday" value="sunday"  />
+    onValueChange={(itemValue, itemIndex) =>setSelectedValue(itemValue)}>
+      {items.map( (item, index) => (
+        <Picker.Item key={index} label={item} value={item.toLowerCase()} />
+      ))}
   </Picker>
   )
 }

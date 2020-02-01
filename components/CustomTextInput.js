@@ -6,7 +6,9 @@ import {spacing, colors, fontSizes} from "../configStyles";
 
 const styles = StyleSheet.create({
   root : {
-    borderColor:"yellow"
+    borderColor:"yellow",
+    color:colors.neonCyan,
+    fontSize:fontSizes.sm
   }
 })
 
@@ -15,7 +17,7 @@ export const CustomTextInput = ({text}) => {
   return (
     <TextInput 
     style={styles.root}
-    editable
+    editable={true}
     maxLength={40}
     >
       {text}

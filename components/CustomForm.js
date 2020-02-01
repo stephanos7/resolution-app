@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {
-  StyleSheet, Button, View
+  StyleSheet, TouchableOpacity, View, Text
 } from 'react-native';
 import { LayoutView } from './LayoutView';
+import { colors, radii } from "../configStyles";
 
 const styles = StyleSheet.create({
   formContainer : {
     flex:1,
   },
-  buttonStyle:{
-    backgroundColor:"white"
+  buttonsContainer: {
+    alignItems:"center"
   }
 })
 
@@ -22,7 +23,29 @@ export const CustomForm = ({children, buttonTitle}) => {
     <View style={styles.formContainer}>
       {children}
     </View>
-    <Button title={buttonTitle} style={styles.buttonStyle} onPress={handleSubmit}/>
+
+    {/* MAKE COMPONENTS */}
+    <View style={styles.buttonsContainer}>
+      <TouchableOpacity 
+        style={{
+        borderWidth:1,
+        borderColor:colors.neonCyan,
+        borderRadius:radii.button,
+        display:"flex",
+        alignItems:"center",
+        paddingTop:15,
+        paddingBottom:15,
+        paddingLeft:20,
+        paddingRight:20,
+        width:"30%"
+        }} 
+        onPress={handleSubmit}>
+        <Text style={{color:colors.neonCyan}}>
+          {buttonTitle}
+        </Text>
+      </TouchableOpacity>
+    </View>
+        
   </LayoutView>  
   )
 }
