@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import moment from "moment";
 
-import {ScreenView} from "../components/ScreenView";
+import {GradientView} from "../components/GradientView";
 import {CalendarView} from "../components/CalendarView";
 
 export const CalendarScreen = ({navigation}) => {
@@ -22,9 +22,9 @@ export const CalendarScreen = ({navigation}) => {
   return (
     <>
     <StatusBar barStyle="light-content" />
-      <ScreenView>
+      <GradientView>
       <CalendarView navigation={navigation } currentDate={currentDate}/>
-    </ScreenView>
+    </GradientView>
   </>
   )
 }

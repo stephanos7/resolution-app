@@ -1,7 +1,17 @@
+const sizes = {
+  xxl:108,
+  xl:96,
+  lg:48,
+  md:32,
+  sm:16,
+  xs:10
+}
+
 export const colors = {
     primaryBlack:"#3A3A3A",
-    secondaryBlack: "#2A2A2A",
     incompleteGrey:"#748186",
+    neonCyan:"#0DE7BF",
+    secondaryBlack: "#2A2A2A",
     success: "#B7EA61",
     white:"#fff"
   }
@@ -16,14 +26,20 @@ export const radii = {
 }
 
 export const spacing = {
-  screenSides: 40,
+  screenSides: 20,
+  xxl:sizes.xxl,
+  xl:sizes.xl,
+  lg:sizes.lg,
+  md:sizes.md,
+  sm:sizes.sm,
+  xs:sizes.xs
 }
 
 export const fontSizes = {
-    xxl:108,
-    xl:96,
-    lg:48,
-    md:32,
-    sm:16,
-    xs:10
+    xxl:sizes.xxl,
+    xl:sizes.xl,
+    lg:sizes.lg,
+    md:sizes.md,
+    sm:sizes.sm,
+    xs:sizes.xs
 }

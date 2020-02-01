@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  StyleSheet,
+  StyleSheet, SafeAreaView
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {colors,gradients} from "../configStyles";
 
 const styles = StyleSheet.create({
-  topSafeArea:{
-    flex:0,
-    backgroundColor:colors.secondaryBlack,
+  safeArea:{
+    flex:1,
+    backgroundColor:colors.primaryBlack,
   },
   screenBody:{
     flex:1,
@@ -19,8 +19,10 @@ const styles = StyleSheet.create({
   // }
 })
 
-export const ScreenView = ({children}) => (
+export const GradientView = ({children}) => (
+  <SafeAreaView style={styles.safeArea}>
     <LinearGradient style={styles.screenBody} colors={[...gradients.darkGrey]}>
       {children}
     </LinearGradient>
+  </SafeAreaView>
 )

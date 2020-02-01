@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Text} from "react-native"
-import {ScreenView} from "../components/ScreenView";
+import {GradientView} from "../components/GradientView";
 
 export const AuthLoadingScreen = ({navigation}) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  const handleLoggedIn = (theIsLoggedIn) => {
+  const handleLoggedIn = (theIsLoggedIn) => { 
     if(isLoggedIn){
       return navigation.navigate("NewResolution",{user:"stephos"})
     }else{
@@ -18,8 +18,8 @@ export const AuthLoadingScreen = ({navigation}) => {
   }, [isLoggedIn])
   
   return (
-    <ScreenView>
+    <GradientView>
       <Text style={{color:"white", fontWeight:"bold"}}>LOADING SCREEN. Checking if user is logged-in</Text>
-    </ScreenView>
+    </GradientView>
   )
 }

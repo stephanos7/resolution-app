@@ -1,12 +1,12 @@
 import React from "react";
 import {Text} from "react-native"
-import {ScreenView} from "../components/ScreenView";
+import {GradientView} from "../components/GradientView";
 
 export const LoginScreen = ({navigation}) => {
 
   return (
-    <ScreenView>
+    <GradientView>
       <Text style={{color:"yellow", fontWeight:"bold"}}>LOGIN HERE!</Text>
-    </ScreenView>
+    </GradientView>
   )
 }

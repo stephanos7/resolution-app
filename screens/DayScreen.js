@@ -1,13 +1,13 @@
 import React from "react";
-import {ScreenView} from "../components/ScreenView";
+import {GradientView} from "../components/GradientView";
 import { CalendarCard } from "../components/CalendarCard";
 
 export const DayScreen = ({navigation}) => {
   const getCurrentDateFromTheDateSelectedOnCalendar = navigation.getParam('day', 0)
 
   return (
-    <ScreenView>
+    <GradientView>
       <CalendarCard selectedDate={getCurrentDateFromTheDateSelectedOnCalendar} />
-    </ScreenView>
+    </GradientView>
   )
 }
