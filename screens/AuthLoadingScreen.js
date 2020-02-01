@@ -7,7 +7,7 @@ export const AuthLoadingScreen = ({navigation}) => {
 
   const handleLoggedIn = (theIsLoggedIn) => {
     if(isLoggedIn){
-      return navigation.navigate("Calendar",{user:"stephos"})
+      return navigation.navigate("NewResolution",{user:"stephos"})
     }else{
       return navigation.navigate("Login")
     }
@@ -16,7 +16,7 @@ export const AuthLoadingScreen = ({navigation}) => {
   useEffect(() => {
     handleLoggedIn(isLoggedIn)
   }, [isLoggedIn])
-
+  
   return (
     <ScreenView>
       <Text style={{color:"white", fontWeight:"bold"}}>LOADING SCREEN. Checking if user is logged-in</Text>
