@@ -21,7 +21,7 @@ export const NewResolutionScreen = ({navigation}) => {
   const frequency = ["single", "two", "three","four"];
   const {theme} = React.useContext(ThemeContext)
   return (
-    <GradientView>
+    <GradientView theme={theme}>
       <LayoutView>
 <Text style={{color:"red"}}>{theme}</Text>
         <CustomForm buttonTitle="Create">

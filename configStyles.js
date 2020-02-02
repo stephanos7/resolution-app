@@ -17,8 +17,8 @@ export const colors = {
   }
 
 export const gradients = {
-  darkGrey: [colors.secondaryBlack,colors.primaryBlack],
-
+  dark: [colors.secondaryBlack,colors.primaryBlack],
+  light: [colors.white,colors.white]
 }
 
 export const radii = {
