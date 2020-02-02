@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StatusBar,
+  StatusBar, Text
 } from 'react-native';
 import moment from "moment";
 
-import {GradientView} from "../components/GradientView";
-import {CalendarView} from "../components/CalendarView";
+import { GradientView } from "../components/GradientView";
+import { CalendarView } from "../components/CalendarView";
+
+import { ThemeContext} from "../context/Theme";
 
 export const CalendarScreen = ({navigation}) => {
+  const {theme} = React.useContext(ThemeContext)
   const [currentDate, setCurrentDate] = useState();
 
   const getCurrentDate = () => {
@@ -23,8 +26,9 @@ export const CalendarScreen = ({navigation}) => {
     <>
     <StatusBar barStyle="light-content" />
       <GradientView>
-      <CalendarView navigation={navigation } currentDate={currentDate}/>
-    </GradientView>
+        <Text style={{color:"red"}}>{theme}</Text>
+        <CalendarView navigation={navigation} currentDate={currentDate}/>
+      </GradientView>
   </>
   )
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import {View, Text} from "react-native";
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -9,13 +10,27 @@ import { colors } from './configStyles';
 import { LoginScreen } from './screens/LoginScreen';
 import {NewResolutionScreen} from './screens/NewResolutionScreen';
 
+import {ThemeProvider, ThemeContext} from "./context/Theme";
+
 const AppStack = createStackNavigator({
-  Day : DayScreen,
-  Calendar: CalendarScreen,
-  NewResolution: NewResolutionScreen
+  Day : ({navigation}) => (
+    <ThemeProvider>
+      <DayScreen navigation={navigation} />
+    </ThemeProvider>
+  ) ,
+  Calendar: ({navigation}) => (
+    <ThemeProvider>
+      <CalendarScreen navigation={navigation}  />
+    </ThemeProvider>
+  ),
+  NewResolution: ({navigation}) => (
+    <ThemeProvider>
+      <NewResolutionScreen navigation={navigation}  />
+    </ThemeProvider>
+  )
   },
   {
-    initialRouteName: 'NewResolution',
+    initialRouteName: 'Calendar',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: colors.secondaryBlack,
@@ -47,7 +62,7 @@ const AuthStack = createStackNavigator({
 });
 
 
-export default AppContainer = createAppContainer(
+const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
@@ -59,3 +74,10 @@ export default AppContainer = createAppContainer(
     }
   )
 );
+
+export default () => {
+
+  return(
+    <AppContainer /> 
+  )
+}

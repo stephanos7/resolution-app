@@ -1,11 +1,13 @@
 import React from "react";
-import {View, StyleSheet} from "react-native"
+import {View, StyleSheet, Text} from "react-native"
 import {GradientView} from "../components/GradientView";
 import { LayoutView } from "../components/LayoutView";
 import {CustomPicker} from '../components/CustomPicker';
 import {CustomForm} from "../components/CustomForm";
 import { FormGroup } from "../components/FormGroup";
 import {CustomTextInput} from "../components/CustomTextInput";
+
+import {ThemeContext} from "../context/Theme";
 
 const styles = StyleSheet.create({
   pickersContainer:{
@@ -17,9 +19,11 @@ const styles = StyleSheet.create({
 export const NewResolutionScreen = ({navigation}) => {
   const days = ["Day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
   const frequency = ["single", "two", "three","four"];
+  const {theme} = React.useContext(ThemeContext)
   return (
     <GradientView>
       <LayoutView>
+<Text style={{color:"red"}}>{theme}</Text>
         <CustomForm buttonTitle="Create">
           <FormGroup label="I pledge to:">
             <CustomTextInput text="hello input" />
