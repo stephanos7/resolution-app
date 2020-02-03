@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 export const GradientView = ({children, theme}) => {
   const gradientBasedOnTheme = theme === "Dark" ? gradients.dark : gradients.light
-  // console.log("theme is: ", theme)
+
   return(
   <SafeAreaView style={styles.safeArea}>
     <LinearGradient style={styles.screenBody} colors={[...gradientBasedOnTheme]}>

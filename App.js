@@ -13,7 +13,7 @@ import ThemeContext from "./context/Theme";
 import { VerticalScreenTransitionProvider } from './context/VerticalScreenTransition';
 
 const AppStack = createStackNavigator({
-  Calendar: ({navigation}) => (<CalendarScreen />),
+  Calendar: ({navigation}) => (<CalendarScreen navigation={navigation} />),
   Day : ({navigation}) => (<DayScreen navigation={navigation} />),
   },
   {

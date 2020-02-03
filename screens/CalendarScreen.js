@@ -17,7 +17,6 @@ import {
 
 export const CalendarScreen = ({navigation, themeContext}) => {
   const {theme} = React.useContext(ThemeContext);
-  console.log(theme)
   const [currentDate, setCurrentDate] = useState();
   const getCurrentDate = () => {
     const now = moment()
@@ -31,7 +30,7 @@ export const CalendarScreen = ({navigation, themeContext}) => {
   return (
       <>
         <StatusBar barStyle="light-content" />
-        <GradientView >
+        <GradientView theme={theme}>
           <Mock />
           {/* <Text style={{color:"red"}}>{theme}</Text> */}
           <CalendarView navigation={navigation} currentDate={currentDate}/>
