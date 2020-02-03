@@ -8,8 +8,8 @@ import { DayScreen } from "./screens/DayScreen";
 import { colors } from './configStyles';
 import { LoginScreen } from './screens/LoginScreen';
 
-import ThemeContext from "./context/Theme";
-import { ScreenTransitionProvider, ScreenTransitionConsumer } from "./context/ScreenTransition";
+import { ThemeProvider } from "./context/Theme";
+import { ScreenTransitionProvider } from "./context/ScreenTransition";
 
 const AppStack = createStackNavigator({
   Calendar: ({navigation}) => 
@@ -65,13 +65,12 @@ const AppContainer = createAppContainer(
 );
 
 const AppContainerWithTheme = () => {
-  const [theme, setTheme] = useState("Dark");
-  const toggleTheme = theme => theme === "Dark" ? setTheme("Light" ):  setTheme("Dark");
+
 
   return (
-    <ThemeContext.Provider value={{theme,toggleTheme}}>
-      <AppContainer screenProps={{theme}} />
-    </ThemeContext.Provider>
+    <ThemeProvider>
+      <AppContainer />
+    </ThemeProvider>
     )
 }
 

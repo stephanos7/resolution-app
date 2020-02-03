@@ -8,8 +8,8 @@ import { GradientView } from "../components/GradientView";
 import { CalendarView } from "../components/CalendarView";
 import { Mock } from "../components/Mock";
 
-import ThemeContext from "../context/Theme";
-import { ScreenTransitionProvider, ScreenTransitionConsumer } from "../context/ScreenTransition";
+import { ThemeConsumer } from "../context/Theme";
+import {  ScreenTransitionConsumer } from "../context/ScreenTransition";
 
 
 export const CalendarScreen = ({navigation}) => {
@@ -24,7 +24,7 @@ export const CalendarScreen = ({navigation}) => {
   }, [])
 
   return (
-    <ThemeContext.Consumer>
+    <ThemeConsumer>
         { ({theme}) =>
             (
               <ScreenTransitionConsumer>
@@ -39,7 +39,7 @@ export const CalendarScreen = ({navigation}) => {
               )}
             </ScreenTransitionConsumer> 
             )}
-    </ThemeContext.Consumer>
+    </ThemeConsumer>
 
   )
 }
