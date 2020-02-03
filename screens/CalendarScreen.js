@@ -15,7 +15,7 @@ import {
 } from "../context/VerticalScreenTransition";
 
 
-export const CalendarScreen = ({navigation, themeContext}) => {
+export const CalendarScreen = ({navigation}) => {
   const [currentDate, setCurrentDate] = useState();
   
   const getCurrentDate = () => {
@@ -29,10 +29,10 @@ export const CalendarScreen = ({navigation, themeContext}) => {
 
   return (
     <ThemeContext.Consumer>
-        { themeContext =>
+        { ({theme}) =>
             (<>
               <StatusBar barStyle="light-content" />
-                <GradientView theme={themeContext.theme}>
+                <GradientView theme={theme}>
                   <Mock />
                   {/* <Text style={{color:"red"}}>{theme}</Text> */}
                   <CalendarView navigation={navigation} currentDate={currentDate}/>
