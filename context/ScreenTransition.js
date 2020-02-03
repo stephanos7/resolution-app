@@ -4,10 +4,10 @@ const {Provider, Consumer} = React.createContext();
 
 const ScreenTransitionProvider = ({children}) => {
   const [screenInFocus, setScreenInFocus] = useState("Calendar");
-  const transitionScreen = screen => setScreenInFocus(screen);
+  const toggleScreen = () => screenInFocus === "Calendar" ? setScreenInFocus("NewResolution") : setScreenInFocus("Calendar");
 
   return(
-    <Provider value={{screenInFocus,transitionScreen}}>
+    <Provider value={{screenInFocus,toggleScreen}}>
       {children}
     </Provider>
   )

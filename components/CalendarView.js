@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StatusBar,
-  Text
+  View
 } from 'react-native';
 import moment, { calendarFormat } from "moment";
 import {Calendar, CalendarList} from 'react-native-calendars';
 import { colors, fontSizes } from '../configStyles';
 
-export const CalendarView = ({navigation, currentDate}) => {
+export const CalendarView = ({navigation, currentDate, screenInFocus, transitionScreen}) => {
   const calendarDateFormat = "YYYY-MM-DD"
   const currentFormattedDate = moment(currentDate).utc().format(calendarDateFormat)
   const getEndOfYear = () => {
@@ -88,6 +87,7 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
 // END OF TEST AREA
 
   return(
+    <View style={{flex:3}}>
     <CalendarList
       scrollEnabled={true}
       // Initially visible month. Default = Date()
@@ -162,5 +162,7 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
         textDayHeaderFontSize: 16
       }}
   />
+  </View>
+
   )
 }

@@ -28,12 +28,12 @@ export const CalendarScreen = ({navigation}) => {
         { ({theme}) =>
             (
               <ScreenTransitionConsumer>
-              { ({screenInFocus, transitionScreen}) => (
+              { ({screenInFocus, toggleScreen}) => (
               <>
               <StatusBar barStyle="light-content" />
               <GradientView theme={theme}>
-                <Mock screenInFocus={screenInFocus}/>
-                <CalendarView navigation={navigation} currentDate={currentDate}/>
+                <Mock screenInFocus={screenInFocus} toggleScreen={toggleScreen}/>
+                <CalendarView screenInFocus={screenInFocus} navigation={navigation} currentDate={currentDate}/>
               </GradientView>
               </>
               )}
