@@ -6,12 +6,16 @@ import ThemeContext from "../context/Theme";
 
 export const DayScreen = ({navigation}) => {
   const getCurrentDateFromTheDateSelectedOnCalendar = navigation.getParam('day', 0)
-  const {theme} = React.useContext(ThemeContext)
 
   return (
-    <GradientView theme={theme}>
-      <Text style={{color:"red"}}>{theme}</Text>
-      <CalendarCard selectedDate={getCurrentDateFromTheDateSelectedOnCalendar} />
-    </GradientView>
+    <ThemeContext.Consumer>
+      { themeContext => (
+          <GradientView theme={themeContext.theme}>
+            <Text style={{color:"red"}}>{themeContext.theme}</Text>
+            <CalendarCard selectedDate={getCurrentDateFromTheDateSelectedOnCalendar} />
+          </GradientView>
+      )}
+    </ThemeContext.Consumer>
+
   )
 }

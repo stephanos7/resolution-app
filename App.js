@@ -7,7 +7,6 @@ import { CalendarScreen } from "./screens/CalendarScreen";
 import { DayScreen } from "./screens/DayScreen";
 import { colors } from './configStyles';
 import { LoginScreen } from './screens/LoginScreen';
-import { NewResolutionScreen } from './screens/NewResolutionScreen';
 
 import ThemeContext from "./context/Theme";
 import { VerticalScreenTransitionProvider } from './context/VerticalScreenTransition';

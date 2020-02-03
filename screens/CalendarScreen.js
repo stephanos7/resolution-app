@@ -16,8 +16,8 @@ import {
 
 
 export const CalendarScreen = ({navigation, themeContext}) => {
-  // const {theme} = React.useContext(ThemeContext);
   const [currentDate, setCurrentDate] = useState();
+  
   const getCurrentDate = () => {
     const now = moment()
     return setCurrentDate(now);
