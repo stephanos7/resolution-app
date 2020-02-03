@@ -9,10 +9,15 @@ import { colors } from './configStyles';
 import { LoginScreen } from './screens/LoginScreen';
 
 import ThemeContext from "./context/Theme";
-import { VerticalScreenTransitionProvider } from './context/VerticalScreenTransition';
+import { ScreenTransitionProvider, ScreenTransitionConsumer } from "./context/ScreenTransition";
 
 const AppStack = createStackNavigator({
-  Calendar: ({navigation}) => (<CalendarScreen navigation={navigation} />),
+  Calendar: ({navigation}) => 
+  (
+    <ScreenTransitionProvider>
+      <CalendarScreen navigation={navigation} />
+    </ScreenTransitionProvider>
+  ),
   Day : ({navigation}) => (<DayScreen navigation={navigation} />),
   },
   {

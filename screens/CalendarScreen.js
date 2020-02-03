@@ -9,15 +9,11 @@ import { CalendarView } from "../components/CalendarView";
 import { Mock } from "../components/Mock";
 
 import ThemeContext from "../context/Theme";
-import { 
-  VerticalScreenTransitionContext,
-   VerticalScreenTransitionProvider 
-} from "../context/VerticalScreenTransition";
+import { ScreenTransitionProvider, ScreenTransitionConsumer } from "../context/ScreenTransition";
 
 
 export const CalendarScreen = ({navigation}) => {
   const [currentDate, setCurrentDate] = useState();
-  
   const getCurrentDate = () => {
     const now = moment()
     return setCurrentDate(now);
@@ -30,15 +26,19 @@ export const CalendarScreen = ({navigation}) => {
   return (
     <ThemeContext.Consumer>
         { ({theme}) =>
-            (<>
+            (
+              <ScreenTransitionConsumer>
+              { ({screenInFocus, transitionScreen}) => (
+              <>
               <StatusBar barStyle="light-content" />
-                <GradientView theme={theme}>
-                  <Mock />
-                  {/* <Text style={{color:"red"}}>{theme}</Text> */}
-                  <CalendarView navigation={navigation} currentDate={currentDate}/>
+              <GradientView theme={theme}>
+                <Mock screenInFocus={screenInFocus}/>
+                <CalendarView navigation={navigation} currentDate={currentDate}/>
               </GradientView>
-            </>)
-        }
+              </>
+              )}
+            </ScreenTransitionConsumer> 
+            )}
     </ThemeContext.Consumer>
 
   )
