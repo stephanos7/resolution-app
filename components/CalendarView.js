@@ -83,7 +83,7 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
 
 
 
-const dateMarkers = createDateMarkersAtIntervals(start2,end2,7,resolutionPresent, incomplete)
+// const dateMarkers = createDateMarkersAtIntervals(start2,end2,7,resolutionPresent, incomplete)
 
 // END OF TEST AREA
 
@@ -130,9 +130,9 @@ const dateMarkers = createDateMarkersAtIntervals(start2,end2,7,resolutionPresent
       // need this prop to have multiple markers on a date
       markingType={'multi-dot'}
 
-      markedDates={{
-        ...dateMarkers
-      }}
+      // markedDates={{
+      //   ...dateMarkers
+      // }}
 
       
 

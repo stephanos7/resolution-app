@@ -7,7 +7,7 @@ export const AuthLoadingScreen = ({navigation}) => {
 
   const handleLoggedIn = (theIsLoggedIn) => { 
     if(isLoggedIn){
-      return navigation.navigate("NewResolution",{user:"stephos"})
+      return navigation.navigate("Calendar",{user:"stephos"})
     }else{
       return navigation.navigate("Login")
     }

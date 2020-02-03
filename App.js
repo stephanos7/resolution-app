@@ -1,5 +1,4 @@
-import React from 'react';
-import {View, Text} from "react-native";
+import React, {useState} from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -8,29 +7,16 @@ import { CalendarScreen } from "./screens/CalendarScreen";
 import { DayScreen } from "./screens/DayScreen";
 import { colors } from './configStyles';
 import { LoginScreen } from './screens/LoginScreen';
-import {NewResolutionScreen} from './screens/NewResolutionScreen';
+import { NewResolutionScreen } from './screens/NewResolutionScreen';
 
-import {ThemeProvider, ThemeContext} from "./context/Theme";
+import ThemeContext from "./context/Theme";
+import { VerticalScreenTransitionProvider } from './context/VerticalScreenTransition';
 
 const AppStack = createStackNavigator({
-  Day : ({navigation}) => (
-    <ThemeProvider>
-      <DayScreen navigation={navigation} />
-    </ThemeProvider>
-  ) ,
-  Calendar: ({navigation}) => (
-    <ThemeProvider>
-      <CalendarScreen navigation={navigation}  />
-    </ThemeProvider>
-  ),
-  NewResolution: ({navigation}) => (
-    <ThemeProvider>
-      <NewResolutionScreen navigation={navigation}  />
-    </ThemeProvider>
-  )
+  Calendar: ({navigation}) => (<CalendarScreen />),
+  Day : ({navigation}) => (<DayScreen navigation={navigation} />),
   },
   {
-    initialRouteName: 'Calendar',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: colors.secondaryBlack,
@@ -61,7 +47,6 @@ const AuthStack = createStackNavigator({
     },
 });
 
-
 const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
@@ -75,9 +60,22 @@ const AppContainer = createAppContainer(
   )
 );
 
-export default () => {
+const AppContainerWithTheme = () => {
+  const [theme, setTheme] = useState("Dark");
+  const toggleTheme = theme => theme === "Dark" ? setTheme("Light" ):  setTheme("Dark");
+
+  return (
+    <ThemeContext.Provider value={{theme,toggleTheme}}>
+      <AppContainer screenProps={{theme}} />
+    </ThemeContext.Provider>
+    )
+}
+
+
+
+export default () => { 
 
   return(
-    <AppContainer /> 
+    <AppContainerWithTheme /> 
   )
 }
