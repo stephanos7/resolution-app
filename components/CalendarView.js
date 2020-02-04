@@ -8,7 +8,8 @@ import {
   getCurrentFormattedDate,
   calendarViewDateFormat, 
   weekDayNames,
-  currentYear
+  currentYear,
+  currentMonth
 } from "../utils/dateHelpers";
 import { colors, fontSizes } from '../configStyles';
 
@@ -28,8 +29,7 @@ export const CalendarView = ({navigation, currentDate, screenInFocus, transition
   const startOfYear = getFormattedStartOfYear(currentYear);
   const endOfYear = getFormattedEndOfYear(currentYear);
 
-  console.log("end of year FORMAT::", endOfYear)
-  console.log("start of year FORMAT:: ", startOfYear)
+  console.log("this month: ", currentMonth)
 
   const handlePress = (day) =>  navigation.navigate('Day',{day})
   const resolutionPresent = {key:'resolutionPresent', color: 'yellow'};
@@ -101,6 +101,8 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
     (<Text styles={{color:"white", fontSize:30, fontWeight:"bold"}}>Calendar</Text>)
     : ( */}
     <CalendarList
+        pastScrollRange={currentMonth-1}
+        futureScrollRange={12-currentMonth}
         scrollEnabled={true}  
         // Initially visible month. Default = Date()
         current={current}
