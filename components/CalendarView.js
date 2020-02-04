@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useMemo} from 'react';
 import {
   View, Text
 } from 'react-native';
@@ -12,7 +12,10 @@ import {
 import { colors, fontSizes } from '../configStyles';
 
 export const CalendarView = ({navigation, currentDate, screenInFocus, transitionScreen}) => {
-  console.log("CURRE DAY??? ", currentDate)
+  console.log("CURRE MOMENT??? ", currentDate)
+
+
+
   const getEndOfYear = () => {
     const currentYear = moment().year()
     return moment(`${currentYear}-12-31`).utc()
@@ -29,8 +32,9 @@ export const CalendarView = ({navigation, currentDate, screenInFocus, transition
     // .format(calendarDateFormat)
   }
   const currentMonth = getCurrentMonth();
-  console.log("CURR MONTH::", currentMonth)
-  const current = getCurrentFormattedDate(currentDate, calendarViewDateFormat)
+  const current = useMemo( () => getCurrentFormattedDate(currentDate, calendarViewDateFormat), [currentDate, calendarViewDateFormat])
+
+  console.log("CURR FORMAT::", current)
   const endOfYear = getEndOfYear()
   const startOfYear = getStartOfYear();
   const handlePress = (day) =>  navigation.navigate('Day',{day})
@@ -99,12 +103,13 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
 
   return(
     <View style={{flex:3}}>
-    { screenInFocus !== "Calendar" ? 
+    {/* { screenInFocus !== "Calendar" ? 
     (<Text styles={{color:"white", fontSize:30, fontWeight:"bold"}}>Calendar</Text>)
-    : (<CalendarList
-        scrollEnabled={true}
+    : ( */}
+    <CalendarList
+        scrollEnabled={true}  
         // Initially visible month. Default = Date()
-        current={current}
+        current={"2020-05-02"}
         // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
         minDate={'2020-01-01'}
         // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
@@ -154,7 +159,7 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
           calendarBackground: 'transparent',
           textSectionTitleColor: '#ffffff',
           selectedDayBackgroundColor: '#00adf5',
-          selectedDayTextColor: '#ffffff',
+          selectedDayTextColor: 'blue',
           todayTextColor: 'red',
           dayTextColor: "#ffffff",
           textDisabledColor: colors.incompleteGrey,
@@ -174,8 +179,9 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
           textMonthFontSize: fontSizes.md,
           textDayHeaderFontSize: 16
         }}
-    />)
-    }
+    />
+    {/* )
+    } */}
   </View>
 
   )
