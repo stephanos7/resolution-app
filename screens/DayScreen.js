@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { GradientView } from "../components/GradientView";
 import { CalendarCard } from "../components/CalendarCard";
-import { ThemeConsumer } from "../context/Theme";
+import { ThemeConsumer } from "../context/ThemeContext";
 
 export const DayScreen = ({navigation}) => {
   const getCurrentDateFromTheDateSelectedOnCalendar = navigation.getParam('day', 0)

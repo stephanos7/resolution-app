@@ -17,7 +17,7 @@ if (Platform.OS === 'android') {
 }
 
 
-export const Mock = ({screenInFocus, toggleScreen}) => {
+export const Mock = ({screenInFocus, currentDate, toggleScreen}) => {
   const [flex, setFlex] = useState(12);
   const toggleFlex = () => flex === 1 ? setFlex(12) : setFlex(1);
   const handlePress = () => {
@@ -45,7 +45,7 @@ export const Mock = ({screenInFocus, toggleScreen}) => {
       onPress={handlePress}
       style={{width:"40%",padding:10, backgroundColor:"lightblue"}}
       >
-      <Text style={{color:"red"}}>this is focused: {screenInFocus}</Text>
+        <Text style={{color:"red"}} >this is focused: {screenInFocus} AND DAY IS : {JSON.stringify(currentDate)}</Text>
     </TouchableOpacity> 
   </View>
 )}

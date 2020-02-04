@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {
-  View
+  View, Text
 } from 'react-native';
-import moment, { calendarFormat } from "moment";
-import {Calendar, CalendarList} from 'react-native-calendars';
+import moment from "moment";
+import { CalendarList} from 'react-native-calendars';
+import { 
+  getCurrentFormattedDate,
+  calendarViewDateFormat, 
+  weekDayNames
+} from "../utils/dateHelpers";
 import { colors, fontSizes } from '../configStyles';
 
 export const CalendarView = ({navigation, currentDate, screenInFocus, transitionScreen}) => {
-  const calendarDateFormat = "YYYY-MM-DD"
-  const currentFormattedDate = moment(currentDate).utc().format(calendarDateFormat)
+  console.log("CURRE DAY??? ", currentDate)
   const getEndOfYear = () => {
     const currentYear = moment().year()
     return moment(`${currentYear}-12-31`).utc()
@@ -19,7 +23,14 @@ export const CalendarView = ({navigation, currentDate, screenInFocus, transition
     return moment(`${currentYear}-01-01`).utc()
     // .format(calendarDateFormat)
   }
-
+  const getCurrentMonth = () => {
+    const currentMonth = moment();
+    return currentMonth
+    // .format(calendarDateFormat)
+  }
+  const currentMonth = getCurrentMonth();
+  console.log("CURR MONTH::", currentMonth)
+  const current = getCurrentFormattedDate(currentDate, calendarViewDateFormat)
   const endOfYear = getEndOfYear()
   const startOfYear = getStartOfYear();
   const handlePress = (day) =>  navigation.navigate('Day',{day})
@@ -30,11 +41,11 @@ export const CalendarView = ({navigation, currentDate, screenInFocus, transition
 
     // TEST AREA
 
-    const createDateMarkersAtIntervals = (startDate, endDate, interval, ...dots) => {
+const createDateMarkersAtIntervals = (startDate, endDate, interval, ...dots) => {
       let now = startDate.clone(), dates = {}
-  
+    
       while (now.isSameOrBefore(endDate)) {
-          let formattedNow = now.format(calendarDateFormat) 
+          let formattedNow = now.format(calendarViewDateFormat) 
           Object.defineProperty(dates,formattedNow, {
             value: {dots:[...dots]},
             writable: true,
@@ -45,7 +56,7 @@ export const CalendarView = ({navigation, currentDate, screenInFocus, transition
           console.log(dates)
       }
       return dates;
-  };
+    };
   
    
   const start1 = moment("2020-05-26")
@@ -66,8 +77,8 @@ const activityToPlay = ["2020-05-26","2020-05-27","2020-05-29"];
 // }
 const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
   const dayToCheckAgainst = startingDate.clone()
-  const possibleDayNames = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-  if(possibleDayNames.includes(nameOfDay)){
+  
+  if(weekDayNames.includes(nameOfDay)){
     while (!(dayToCheckAgainst.format("dddd") === nameOfDay) ){
       dayToCheckAgainst.add(1,"days");
       console.log(dayToCheckAgainst, dayToCheckAgainst.format("dddd"))
@@ -88,80 +99,83 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
 
   return(
     <View style={{flex:3}}>
-    <CalendarList
-      scrollEnabled={true}
-      // Initially visible month. Default = Date()
-      current={currentFormattedDate}
-      // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-      minDate={'2020-01-01'}
-      // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-      maxDate={currentFormattedDate}
-      // Handler which gets executed on day press. Default = undefined
-      onDayPress={handlePress}
-      // Handler which gets executed on day long press. Default = undefined
-      onDayLongPress={(day) => {console.log('selected day', day)}}
-      // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-      monthFormat={'MMMM yyyy'}
-      // Handler which gets executed when visible month changes in calendar. Default = undefined
-      onMonthChange={(month) => {console.log('month changed', month)}}
-      // Hide month navigation arrows. Default = false
-      hideArrows={true}
-      // Replace default arrows with custom ones (direction can be 'left' or 'right')
-      renderArrow={(direction) => (<Arrow/>)}
-      // Do not show days of other months in month page. Default = false
-      hideExtraDays={true}
-      // If hideArrows=false and hideExtraDays=false do not switch month when tapping on greyed out
-      // day from another month that is visible in calendar page. Default = false
-      disableMonthChange={true}
-      // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday.
-      firstDay={1}
-      // Hide day names. Default = false
-      hideDayNames={true}
-      // Show week numbers to the left. Default = false
-      showWeekNumbers={true}
-      // Handler which gets executed when press arrow icon left. It receive a callback can go back month
-      onPressArrowLeft={substractMonth => substractMonth()}
-      // Handler which gets executed when press arrow icon right. It receive a callback can go next month
-      onPressArrowRight={addMonth => addMonth()}
-      // Disable left arrow. Default = false
-      disableArrowLeft={true}
-      // Disable right arrow. Default = false
-      disableArrowRight={true}
-      // need this prop to have multiple markers on a date
-      markingType={'multi-dot'}
+    { screenInFocus !== "Calendar" ? 
+    (<Text styles={{color:"white", fontSize:30, fontWeight:"bold"}}>Calendar</Text>)
+    : (<CalendarList
+        scrollEnabled={true}
+        // Initially visible month. Default = Date()
+        current={current}
+        // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
+        minDate={'2020-01-01'}
+        // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
+        maxDate={current}
+        // Handler which gets executed on day press. Default = undefined
+        onDayPress={handlePress}
+        // Handler which gets executed on day long press. Default = undefined
+        onDayLongPress={(day) => {console.log('selected day', day)}}
+        // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
+        monthFormat={'MMMM yyyy'}
+        // Handler which gets executed when visible month changes in calendar. Default = undefined
+        onMonthChange={(month) => {console.log('month changed', month)}}
+        // Hide month navigation arrows. Default = false
+        hideArrows={true}
+        // Replace default arrows with custom ones (direction can be 'left' or 'right')
+        renderArrow={(direction) => (<Arrow/>)}
+        // Do not show days of other months in month page. Default = false
+        hideExtraDays={true}
+        // If hideArrows=false and hideExtraDays=false do not switch month when tapping on greyed out
+        // day from another month that is visible in calendar page. Default = false
+        disableMonthChange={true}
+        // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday.
+        firstDay={1}
+        // Hide day names. Default = false
+        hideDayNames={true}
+        // Show week numbers to the left. Default = false
+        showWeekNumbers={true}
+        // Handler which gets executed when press arrow icon left. It receive a callback can go back month
+        onPressArrowLeft={substractMonth => substractMonth()}
+        // Handler which gets executed when press arrow icon right. It receive a callback can go next month
+        onPressArrowRight={addMonth => addMonth()}
+        // Disable left arrow. Default = false
+        disableArrowLeft={true}
+        // Disable right arrow. Default = false
+        disableArrowRight={true}
+        // need this prop to have multiple markers on a date
+        markingType={'multi-dot'}
 
-      // markedDates={{
-      //   ...dateMarkers
-      // }}
+        // markedDates={{
+        //   ...dateMarkers
+        // }}
 
-      
+        
 
-      theme={{
-        // backgroundColor: '#ffffff',
-        calendarBackground: 'transparent',
-        textSectionTitleColor: '#ffffff',
-        selectedDayBackgroundColor: '#00adf5',
-        selectedDayTextColor: '#ffffff',
-        todayTextColor: '#00adf5',
-        dayTextColor: "#ffffff",
-        textDisabledColor: colors.incompleteGrey,
-        dotColor: '#00adf5',
-        selectedDotColor: '#ffffff',
-        // arrowColor: 'orange',
-        // disabledArrowColor: '#d9e1e8',
-        monthTextColor: colors.white,
-        indicatorColor: 'blue',
-        // textDayFontFamily: 'monospace',
-        // textMonthFontFamily: 'monospace',
-        // textDayHeaderFontFamily: 'monospace',
-        textDayFontWeight: '300',
-        textMonthFontWeight: 'bold',
-        textDayHeaderFontWeight: '300',
-        textDayFontSize: fontSizes.sm,
-        textMonthFontSize: fontSizes.md,
-        textDayHeaderFontSize: 16
-      }}
-  />
+        theme={{
+          // backgroundColor: '#ffffff',
+          calendarBackground: 'transparent',
+          textSectionTitleColor: '#ffffff',
+          selectedDayBackgroundColor: '#00adf5',
+          selectedDayTextColor: '#ffffff',
+          todayTextColor: 'red',
+          dayTextColor: "#ffffff",
+          textDisabledColor: colors.incompleteGrey,
+          dotColor: '#00adf5',
+          selectedDotColor: '#ffffff',
+          // arrowColor: 'orange',
+          // disabledArrowColor: '#d9e1e8',
+          monthTextColor: colors.white,
+          indicatorColor: 'blue',
+          // textDayFontFamily: 'monospace',
+          // textMonthFontFamily: 'monospace',
+          // textDayHeaderFontFamily: 'monospace',
+          textDayFontWeight: '300',
+          textMonthFontWeight: 'bold',
+          textDayHeaderFontWeight: '300',
+          textDayFontSize: fontSizes.sm,
+          textMonthFontSize: fontSizes.md,
+          textDayHeaderFontSize: 16
+        }}
+    />)
+    }
   </View>
 
   )

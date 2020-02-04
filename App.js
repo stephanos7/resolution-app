@@ -8,14 +8,17 @@ import { DayScreen } from "./screens/DayScreen";
 import { colors } from './configStyles';
 import { LoginScreen } from './screens/LoginScreen';
 
-import { ThemeProvider } from "./context/Theme";
-import { ScreenTransitionProvider } from "./context/ScreenTransition";
+import { ThemeProvider } from "./context/ThemeContext";
+import { DatesProvider } from "./context/DatesContext";
+import { ScreenTransitionProvider } from "./context/ScreenTransitionContext";
 
 const AppStack = createStackNavigator({
   Calendar: ({navigation}) => 
   (
     <ScreenTransitionProvider>
-      <CalendarScreen navigation={navigation} />
+      <DatesProvider>
+        <CalendarScreen navigation={navigation} />
+      </DatesProvider>
     </ScreenTransitionProvider>
   ),
   Day : ({navigation}) => (<DayScreen navigation={navigation} />),

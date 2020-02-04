@@ -1,41 +1,34 @@
 import React, {useEffect, useState} from 'react';
 import {
-  StatusBar, Text
+  StatusBar
 } from 'react-native';
-import moment from "moment";
 
 import { GradientView } from "../components/GradientView";
 import { CalendarView } from "../components/CalendarView";
 import { Mock } from "../components/Mock";
 
-import { ThemeConsumer } from "../context/Theme";
-import {  ScreenTransitionConsumer } from "../context/ScreenTransition";
+import { ThemeConsumer } from "../context/ThemeContext";
+import { DatesConsumer } from "../context/DatesContext";
+import { ScreenTransitionConsumer } from "../context/ScreenTransitionContext";
 
 
 export const CalendarScreen = ({navigation}) => {
-  const [currentDate, setCurrentDate] = useState();
-  const getCurrentDate = () => {
-    const now = moment()
-    return setCurrentDate(now);
-  }
-
-  useEffect(() => {
-    return getCurrentDate();
-  }, [])
-
   return (
     <ThemeConsumer>
-        { ({theme}) =>
-            (
+        { ({theme}) => (
               <ScreenTransitionConsumer>
               { ({screenInFocus, toggleScreen}) => (
-              <>
-              <StatusBar barStyle="light-content" />
-              <GradientView theme={theme}>
-                <Mock screenInFocus={screenInFocus} toggleScreen={toggleScreen}/>
-                <CalendarView screenInFocus={screenInFocus} navigation={navigation} currentDate={currentDate}/>
-              </GradientView>
-              </>
+                  <DatesConsumer>
+                    { ({currentDate}) => (
+                      <>
+                      <StatusBar barStyle="light-content" />
+                      <GradientView theme={theme}>
+                        <Mock screenInFocus={screenInFocus} toggleScreen={toggleScreen} currentDate={currentDate} />
+                        <CalendarView screenInFocus={screenInFocus} navigation={navigation} currentDate={currentDate}/>
+                      </GradientView>
+                      </>
+                    )}
+                  </DatesConsumer>
               )}
             </ScreenTransitionConsumer> 
             )}

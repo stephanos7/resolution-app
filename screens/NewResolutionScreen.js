@@ -7,7 +7,7 @@ import {CustomForm} from "../components/CustomForm";
 import { FormGroup } from "../components/FormGroup";
 import {CustomTextInput} from "../components/CustomTextInput";
 
-import {ThemeContext} from "../context/Theme";
+import {ThemeContext} from "../context/ThemeContext";
 
 const styles = StyleSheet.create({
   pickersContainer:{
