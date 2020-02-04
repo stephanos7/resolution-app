@@ -7,36 +7,30 @@ import { CalendarList} from 'react-native-calendars';
 import { 
   getCurrentFormattedDate,
   calendarViewDateFormat, 
-  weekDayNames
+  weekDayNames,
+  currentYear
 } from "../utils/dateHelpers";
 import { colors, fontSizes } from '../configStyles';
 
 export const CalendarView = ({navigation, currentDate, screenInFocus, transitionScreen}) => {
-  console.log("CURRE MOMENT??? ", currentDate)
 
+  const getFormattedEndOfYear = (theCurrentYear) => {
+    return `${theCurrentYear}-12-31`
+  }
 
-
-  const getEndOfYear = () => {
+  const getFormattedStartOfYear = (theCurrentYear) => {
     const currentYear = moment().year()
-    return moment(`${currentYear}-12-31`).utc()
-    // .format(calendarDateFormat)
+    return `${currentYear}-01-01`
   }
-  const getStartOfYear = () => {
-    const currentYear = moment().year()
-    return moment(`${currentYear}-01-01`).utc()
-    // .format(calendarDateFormat)
-  }
-  const getCurrentMonth = () => {
-    const currentMonth = moment();
-    return currentMonth
-    // .format(calendarDateFormat)
-  }
-  const currentMonth = getCurrentMonth();
+
   const current = useMemo( () => getCurrentFormattedDate(currentDate, calendarViewDateFormat), [currentDate, calendarViewDateFormat])
 
-  console.log("CURR FORMAT::", current)
-  const endOfYear = getEndOfYear()
-  const startOfYear = getStartOfYear();
+  const startOfYear = getFormattedStartOfYear(currentYear);
+  const endOfYear = getFormattedEndOfYear(currentYear);
+
+  console.log("end of year FORMAT::", endOfYear)
+  console.log("start of year FORMAT:: ", startOfYear)
+
   const handlePress = (day) =>  navigation.navigate('Day',{day})
   const resolutionPresent = {key:'resolutionPresent', color: 'yellow'};
   const incomplete = {key:'incomplete', color: 'white'};
@@ -109,11 +103,11 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
     <CalendarList
         scrollEnabled={true}  
         // Initially visible month. Default = Date()
-        current={"2020-05-02"}
+        current={current}
         // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-        minDate={'2020-01-01'}
+        minDate={startOfYear}
         // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-        maxDate={current}
+        maxDate={endOfYear}
         // Handler which gets executed on day press. Default = undefined
         onDayPress={handlePress}
         // Handler which gets executed on day long press. Default = undefined
