@@ -105,17 +105,13 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
     collapseNewResolution();
   }
   
-
   useEffect(() => {
-    console.log("effect fired and state of expanded: ", expanded)
     if(expanded === true){
-      console.log("running when expanded is true")
       Animated.sequence([animateNewResButtonOpacity(0),
       Animated.delay(300),
       animateNewResFormOpacity(1)]).start()
     }
     if(expanded === false){
-      console.log("running when expanded is false")
       Animated.sequence([animateNewResFormOpacity(0),
       Animated.delay(300),
       animateNewResButtonOpacity(1)]).start()
