@@ -46,8 +46,11 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
   const days = ["Day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
   const frequency = ["single", "two", "three","four"];
   const [expanded, setExpanded] = useState(false);
+  const [newResButton, setNewResButton] = useState(true);
   const expandNewResolution = () => setExpanded(true);
   const collapseNewResolution = () => setExpanded(false);
+  const mountNewResButton = () => setNewResButton(true);
+  const unmountNewResButton = () => setNewResButton(false);
 
   const [newResButtonOpacity, setFafeOpacity] = useState(new Animated.Value(1))
   const [newResFormOpacity, setAppearOpacity] = useState(new Animated.Value(0))
@@ -85,8 +88,8 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
       LayoutAnimation.Types.timing,
       // creation prop
       LayoutAnimation.Properties.scaleY,
-    )
-     // callback on end
+    ),
+     () => unmountNewResButton()
     )
     expandNewResolution();
   }
@@ -99,8 +102,8 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
       LayoutAnimation.Types.timing,
       // creation prop
       LayoutAnimation.Properties.scaleY,
-    )
-     // callback on end
+    ),
+    () => mountNewResButton()
     )
     collapseNewResolution();
   }
@@ -117,17 +120,21 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
       animateNewResButtonOpacity(1)]).start()
     }
 },[expanded])
-
+  console.log("BUTTON MOUNTED?", newResButton)
   return(
-    // <View style={{flex}}>
     <View style={[styles.newResContainer,{...animatedFlex}]}>
     
+    {newResButton ? 
+
     <Animated.View style={{opacity:newResButtonOpacity, width:100, backgroundColor:"pink"}}>
-    <TouchableOpacity onPress={handleExpand}><Text>expand</Text></TouchableOpacity>    
+    <TouchableOpacity style={{padding:20}} onPress={handleExpand}><Text>NEW RES</Text></TouchableOpacity>    
     </Animated.View>
+    
+    : null
+    }
 
     <Animated.View style={{opacity:newResFormOpacity, width:100, backgroundColor:"yellow"}}>
-    <TouchableOpacity onPress={handleCollapse}><Text>i will COLLAPSE</Text></TouchableOpacity>
+    <TouchableOpacity style={{padding:50 }}onPress={handleCollapse}><Text>FORM</Text></TouchableOpacity>
     </Animated.View>
 
 {/* <CustomForm buttonTitle="Create">
