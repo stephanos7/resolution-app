@@ -2,17 +2,11 @@ import React, {useState} from 'react';
 import {
   StyleSheet, Text, View
 } from 'react-native';
-import {spacing, colors, fontSizes} from "../configStyles";
-import { LayoutView } from './LayoutView';
+import { FormLabel } from './FormLabel';
 
 const styles = StyleSheet.create({
   root : {
     flex:1,
-  },
-  label:{
-    color:colors.white,
-    fontSize:fontSizes.md,
-    marginBottom:spacing.md
   }
 })
 
@@ -20,9 +14,7 @@ const styles = StyleSheet.create({
 export const FormGroup = ({children, label}) => {
   return (
     <View style={styles.root}>
-      <Text style={styles.label}>
-        {label}
-      </Text>
+      <FormLabel label={label} size="medium" />
       {children}
     </View>
   )

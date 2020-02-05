@@ -96,7 +96,7 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
 // END OF TEST AREA
 
   return(
-    <View style={{flex:3}}>
+    <View style={{flex:4}}>
     {/* { screenInFocus !== "Calendar" ? 
     (<Text styles={{color:"white", fontSize:30, fontWeight:"bold"}}>Calendar</Text>)
     : ( */}

@@ -13,10 +13,6 @@ const styles = StyleSheet.create({
   screenBody:{
     flex:1,
   }
-  // bottomSafeArea:{
-  //   flex:1,
-  //   backgroundColor:colors.primaryBlack,
-  // }
 })
 
 export const GradientView = ({children, theme}) => {

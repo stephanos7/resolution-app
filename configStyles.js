@@ -8,10 +8,10 @@ const sizes = {
 }
 
 export const colors = {
-    primaryBlack:"#3A3A3A",
+    primaryBlack: "#1A1A1A",
+    secondaryBlack:"#5A5A5A",
     incompleteGrey:"#748186",
     neonCyan:"#0DE7BF",
-    secondaryBlack: "#2A2A2A",
     success: "#B7EA61",
     white:"#fff"
   }
@@ -22,7 +22,7 @@ export const gradients = {
 }
 
 export const radii = {
-  large: 12,
+  lg: 15,
   button: 8
 }
 

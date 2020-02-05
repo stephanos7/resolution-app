@@ -9,10 +9,6 @@ const styles = StyleSheet.create({
     flex:1,
     margin:spacing.screenSides,
   }
-  // bottomSafeArea:{
-  //   flex:1,
-  //   backgroundColor:colors.primaryBlack,
-  // }
 })
 
 export const LayoutView = ({children}) => (

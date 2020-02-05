@@ -23,7 +23,7 @@ export const CalendarScreen = ({navigation}) => {
                       <>
                       <StatusBar barStyle="light-content" />
                       <GradientView theme={theme}>
-                        <Mock screenInFocus={screenInFocus} toggleScreen={toggleScreen} currentDate={currentDate} />
+                        <Mock theme={theme} screenInFocus={screenInFocus} toggleScreen={toggleScreen} currentDate={currentDate} />
                         <CalendarView screenInFocus={screenInFocus} navigation={navigation} currentDate={currentDate}/>
                       </GradientView>
                       </>
