@@ -46,10 +46,11 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
   const days = ["Day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
   const frequency = ["single", "two", "three","four"];
   const [expanded, setExpanded] = useState(false);
-  const toggleExpanded = (expanded) => setExpanded(!expanded);
-  const animatedHeight = new Animated.Value(100)
-  const fadeOpacity = new Animated.Value(1)
-  const appearOpacity = new Animated.Value(0)
+  const expandNewResolution = () => setExpanded(true);
+  const collapseNewResolution = () => setExpanded(false);
+
+  const [newResButtonOpacity, setFafeOpacity] = useState(new Animated.Value(1))
+  const [newResFormOpacity, setAppearOpacity] = useState(new Animated.Value(0))
 
 
   const animatedFlex = (expanded ? {flex:12}: {flex:1})
@@ -58,28 +59,28 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
   // useEffect(() => {
   //   screenInFocus === "Calendar" ? toggleFlex({flex:1}) : screenInFocus === "NewResolution" ? toggleFlex({flex:12}) : null
   // }, [screenInFocus])
-  const fadeAnimation = () => Animated.timing(
-    fadeOpacity,
+  const animateNewResButtonOpacity = (value) => Animated.timing(
+    newResButtonOpacity,
     {
-      toValue: 0,
+      toValue: value,
       duration:100,
       useNativeDriver: true
     },
   )
 
-  const appearAnimation = () => Animated.timing(
-    appearOpacity,
+  const animateNewResFormOpacity = (value) => Animated.timing(
+    newResFormOpacity,
     {
-      toValue: 1,
-      duration:300,
+      toValue: value,
+      duration:100,
       useNativeDriver: true
     },
   )
 
-  const handlePress = () => {
+  const handleExpand = () => {
     LayoutAnimation.configureNext(LayoutAnimation.create(
       // duration
-      600,
+      300,
       // type
       LayoutAnimation.Types.timing,
       // creation prop
@@ -87,27 +88,50 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
     )
      // callback on end
     )
-    toggleExpanded();
+    expandNewResolution();
   }
 
+  const handleCollapse = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.create(
+      // duration
+      300,
+      // type
+      LayoutAnimation.Types.timing,
+      // creation prop
+      LayoutAnimation.Properties.scaleY,
+    )
+     // callback on end
+    )
+    collapseNewResolution();
+  }
+  
+
   useEffect(() => {
-    if(expanded){
-      Animated.sequence([fadeAnimation(),
-      Animated.delay(3000),
-      appearAnimation()]).start()
+    console.log("effect fired and state of expanded: ", expanded)
+    if(expanded === true){
+      console.log("running when expanded is true")
+      Animated.sequence([animateNewResButtonOpacity(0),
+      Animated.delay(300),
+      animateNewResFormOpacity(1)]).start()
     }
-  }, [expanded])
+    if(expanded === false){
+      console.log("running when expanded is false")
+      Animated.sequence([animateNewResFormOpacity(0),
+      Animated.delay(300),
+      animateNewResButtonOpacity(1)]).start()
+    }
+},[expanded])
 
   return(
     // <View style={{flex}}>
     <View style={[styles.newResContainer,{...animatedFlex}]}>
     
-    <Animated.View style={{opacity:fadeOpacity, width:100, backgroundColor:"pink"}}>
-    <TouchableOpacity onPress={handlePress}><Text>click me</Text></TouchableOpacity>    
+    <Animated.View style={{opacity:newResButtonOpacity, width:100, backgroundColor:"pink"}}>
+    <TouchableOpacity onPress={handleExpand}><Text>expand</Text></TouchableOpacity>    
     </Animated.View>
 
-    <Animated.View style={{opacity:appearOpacity, width:100, backgroundColor:"yellow"}}>
-      <Text>i will appear</Text>
+    <Animated.View style={{opacity:newResFormOpacity, width:100, backgroundColor:"yellow"}}>
+    <TouchableOpacity onPress={handleCollapse}><Text>i will COLLAPSE</Text></TouchableOpacity>
     </Animated.View>
 
 {/* <CustomForm buttonTitle="Create">
@@ -125,11 +149,7 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
               </View>
             </FormGroup>
           </CustomForm> */}
-          <TouchableOpacity 
           
-          style={{backgroundColor:"blue", padding:20}}>
-            <Text>CLOSE ME!!</Text>
-          </TouchableOpacity>
           </View>)
 
 

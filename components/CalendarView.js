@@ -29,8 +29,6 @@ export const CalendarView = ({navigation, currentDate, screenInFocus, transition
   const startOfYear = getFormattedStartOfYear(currentYear);
   const endOfYear = getFormattedEndOfYear(currentYear);
 
-  console.log("this month: ", currentMonth)
-
   const handlePress = (day) =>  navigation.navigate('Day',{day})
   const resolutionPresent = {key:'resolutionPresent', color: 'yellow'};
   const incomplete = {key:'incomplete', color: 'white'};
