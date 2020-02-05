@@ -9,7 +9,7 @@ const sizes = {
 
 export const colors = {
     primaryBlack: "#1A1A1A",
-    secondaryBlack:"#5A5A5A",
+    secondaryBlack:"#3A3A3A",
     incompleteGrey:"#748186",
     neonCyan:"#0DE7BF",
     success: "#B7EA61",

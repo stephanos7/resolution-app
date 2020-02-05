@@ -35,7 +35,6 @@ if (Platform.OS === 'android') {
 const styles = StyleSheet.create({
   newResContainer : {
     backgroundColor:"transparent",
-    paddingBottom:spacing.md,
   }
 })
 
@@ -72,7 +71,7 @@ export const CalendarScreen = ({navigation}) => {
     newResButtonOpacity,
     {
       toValue: value,
-      duration:100,
+      duration:150,
       useNativeDriver: true
     },
   )
@@ -143,8 +142,27 @@ export const CalendarScreen = ({navigation}) => {
                       {
                         newResButton ? 
 
-                        <Animated.View style={{opacity:newResButtonOpacity, width:100, backgroundColor:"pink"}}>
-                          <TouchableOpacity style={{padding:20}} onPress={handleExpandPress}><Text>NEW RES</Text></TouchableOpacity>    
+                        <Animated.View style={{
+                          alignItems:"center",
+                          opacity:newResButtonOpacity,
+                          padding:spacing.screenSides, 
+                          }}>
+                          <TouchableOpacity 
+                          style={{
+                            alignItems:"center",
+                            backgroundColor:colors.primaryBlack,
+                            borderRadius: radii.button,
+                            flexDirection:"row",
+                            height:"100%",
+                            justifyContent:"space-between",
+                            padding:20,
+                            width:"100%",
+                            }} 
+                            onPress={handleExpandPress}
+                            >
+                              <Text style={{fontSize:fontSizes.sm, fontWeight:"bold", color:colors.white}}>Create new resolutions</Text>
+                              <Text style={{fontSize:fontSizes.md, fontWeight:"bold", color:colors.white}}>+</Text>
+                          </TouchableOpacity>    
                         </Animated.View>
 
                         : null
