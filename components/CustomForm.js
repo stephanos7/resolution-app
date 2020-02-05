@@ -10,12 +10,14 @@ const styles = StyleSheet.create({
     flex:1,
   },
   buttonsContainer: {
-    alignItems:"center"
+    alignItems:"center",
+    flexDirection:"row",
+    justifyContent:"space-around"
   }
 })
 
 
-export const CustomForm = ({children, buttonTitle}) => {
+export const CustomForm = ({children, submitButtonTitle="Submit", cancelButton=false }) => {
   const [data, setData] = useState()
   const handleSubmit = () => console.log("submitted")
   return (
@@ -37,13 +39,34 @@ export const CustomForm = ({children, buttonTitle}) => {
         paddingBottom:15,
         paddingLeft:20,
         paddingRight:20,
-        width:"30%"
         }} 
         onPress={handleSubmit}>
         <Text style={{color:colors.neonCyan}}>
-          {buttonTitle}
+          {submitButtonTitle}
         </Text>
       </TouchableOpacity>
+      { 
+        cancelButton ? 
+          (<TouchableOpacity 
+              style={{
+              borderWidth:1,
+              borderColor:colors.red,
+              borderRadius:radii.button,
+              display:"flex",
+              alignItems:"center",
+              paddingTop:15,
+              paddingBottom:15,
+              paddingLeft:20,
+              paddingRight:20,
+              }} 
+              onPress={handleSubmit}>
+              <Text style={{color:colors.red}}>
+                Cancel
+              </Text>
+            </TouchableOpacity>)
+            :
+          null
+        }
     </View>
         
   </LayoutView>  

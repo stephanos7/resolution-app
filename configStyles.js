@@ -8,10 +8,11 @@ const sizes = {
 }
 
 export const colors = {
-    primaryBlack: "#1A1A1A",
-    secondaryBlack:"#3A3A3A",
     incompleteGrey:"#748186",
     neonCyan:"#0DE7BF",
+    primaryBlack: "#1A1A1A",
+    red:"red",
+    secondaryBlack:"#3A3A3A",
     success: "#B7EA61",
     white:"#fff"
   }

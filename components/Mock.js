@@ -5,25 +5,19 @@ import {
 from "react-native";
 import { GradientView } from "./GradientView";
 import { LayoutView } from './LayoutView';
-import { FormGroup } from "./FormGroup";
-import {CustomForm} from './CustomForm';
-import { CustomTextInput } from "./CustomTextInput";
-import {CustomPicker} from './CustomPicker';
 
 
 
 
 const styles = StyleSheet.create({
   pickersContainer:{
-    flex:1,
-    flexDirection:"row",
+
   },
 
 })
 
 export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
-  const days = ["Day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-  const frequency = ["single", "two", "three","four"];
+
 
 
 
@@ -43,21 +37,7 @@ export const Mock = ({theme, screenInFocus, currentDate, toggleScreen}) => {
 
 
 
-{/* <CustomForm buttonTitle="Create">
-            <FormGroup label="I pledge to:">
-              <CustomTextInput text="hello input" />
-            </FormGroup>
-            <FormGroup label="I'll do this every:" size="medium">
-              <View style={styles.pickersContainer}>
-                <View style={{flex:1}}>
-                  <CustomPicker items={frequency}/>
-                </View>
-                <View style={{flex:1}}>
-                  <CustomPicker items={days}/>
-                </View>
-              </View>
-            </FormGroup>
-          </CustomForm> */}
+
           
 
 

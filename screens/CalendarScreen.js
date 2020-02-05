@@ -12,6 +12,11 @@ import {
 } from 'react-native';
 import { GradientView } from "../components/GradientView";
 import { CalendarView } from "../components/CalendarView";
+import { FormGroup } from "../components/FormGroup";
+import { CustomForm } from '../components/CustomForm';
+import { CustomTextInput } from "../components/CustomTextInput";
+import { CustomPicker} from '../components/CustomPicker';
+
 
 import { ThemeConsumer } from "../context/ThemeContext";
 import { DatesConsumer } from "../context/DatesContext";
@@ -39,11 +44,19 @@ const styles = StyleSheet.create({
 })
 
 export const CalendarScreen = ({navigation}) => {
+  //MOCK DATA
+  const days = ["Day","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+  const frequency = ["single", "two", "three","four"];
+  //MOCK DATA END
+
   // checks whether the screen is expanded during the animation
   const [expanded, setExpanded] = useState(false);
 
-  // checks the New Resolution Button is mounted or unmounted
-  const [newResButton, setNewResButton] = useState(true);
+  // checks IF the components are mounted or unmounted
+  const [newResButtonAndCalendarView, setNewResButtonAndcalendarView] = useState({newResButton:true, calendarView:true});
+
+  // changes the opacity of the New Res Button during the animation
+  const [calendarViewOpacity, setCalendarViewOpacity] = useState(new Animated.Value(1))
 
   // changes the opacity of the New Res Button during the animation
   const [newResButtonOpacity, setNewResButtonOpacity] = useState(new Animated.Value(1))
@@ -61,10 +74,17 @@ export const CalendarScreen = ({navigation}) => {
   const mountNewResButton = () => setNewResButton(true);
 
   // unmounts the New Res Button on the DOM after the screen is collapsed during the animation
-  const unmountNewResButton = () => setNewResButton(false);
+  const unmountNewResButtonAndCalendarView = () => setNewResButtonAndcalendarView({newResButton:false, calendarView:false});
+
+  // mounts the New Res Button on the DOM after the screen is collapsed during the animation
+  const mountCalendarView = () => setCalendarView(true);
+
+  // unmounts the New Res Button on the DOM after the screen is collapsed during the animation
+  const unmountCalendarView = () => setCalendarView(false);
 
   // the flex style property to animate the screen layout during expand/collapse phase of the animation
-  const animatedFlex = (expanded ? {flex:12}: {flex:1})
+  const animatedFlex = (expanded ? {flex:15}: {flex:1})
+
 
   // ANIMATION HANDLERS:
   const animateNewResButtonOpacity = (value) => Animated.timing(
@@ -84,6 +104,15 @@ export const CalendarScreen = ({navigation}) => {
       useNativeDriver: true
     },
   )
+
+  const animateCalendarViewOpacity = (value) => Animated.timing(
+    calendarViewOpacity,
+    {
+      toValue: value,
+      duration:300,
+      useNativeDriver: true
+    },
+  )
   
   // PRESS EVENT HANDLERS
   const handleExpandPress = () => {
@@ -95,7 +124,7 @@ export const CalendarScreen = ({navigation}) => {
       // creation prop
       LayoutAnimation.Properties.scaleY,
     ),
-     () => unmountNewResButton()
+     () => unmountNewResButtonAndCalendarView()
     )
     expandNewResolution();
   }
@@ -117,11 +146,14 @@ export const CalendarScreen = ({navigation}) => {
   // EFFECT TRIGGERED ON EVERY SCREEN RE-LAYOUT (EXPAND-COLLAPSE) WHICH TRIGGERS THE RELEVANT SEQUENCE OF ANIMATIONS
   useEffect(() => {
     if(expanded === true){
-      Animated.sequence([animateNewResButtonOpacity(0),
-      Animated.delay(300),
-      animateNewResFormOpacity(1)]).start()
+      Animated.sequence([
+        animateNewResButtonOpacity(0),
+        Animated.delay(300),
+        animateCalendarViewOpacity(0),
+        animateNewResFormOpacity(1),
+      ]).start()
     }
-    if(expanded === false){
+    else if(expanded === false){
       Animated.sequence([animateNewResFormOpacity(0),
       Animated.delay(300),
       animateNewResButtonOpacity(1)]).start()
@@ -135,48 +167,77 @@ export const CalendarScreen = ({navigation}) => {
               { ({screenInFocus, toggleScreen}) => (
                   <DatesConsumer>
                     { ({currentDate}) => (
-                      <>
+                    <>
                       <StatusBar barStyle="light-content" />
                       <GradientView theme={theme}>
-                      <View style={[styles.newResContainer,{...animatedFlex}]}>
-                      {
-                        newResButton ? 
 
-                        <Animated.View style={{
-                          alignItems:"center",
-                          opacity:newResButtonOpacity,
-                          padding:spacing.screenSides, 
-                          }}>
-                          <TouchableOpacity 
-                          style={{
-                            alignItems:"center",
-                            backgroundColor:colors.primaryBlack,
-                            borderRadius: radii.button,
-                            flexDirection:"row",
-                            height:"100%",
-                            justifyContent:"space-between",
-                            padding:20,
-                            width:"100%",
-                            }} 
-                            onPress={handleExpandPress}
-                            >
-                              <Text style={{fontSize:fontSizes.sm, fontWeight:"bold", color:colors.white}}>Create new resolutions</Text>
-                              <Text style={{fontSize:fontSizes.md, fontWeight:"bold", color:colors.white}}>+</Text>
-                          </TouchableOpacity>    
-                        </Animated.View>
+                        <View style={[styles.newResContainer,{...animatedFlex}]}>
+                          {
+                            newResButtonAndCalendarView.newResButton ? 
 
-                        : null
-                      }
+                            <Animated.View style={{
+                              alignItems:"center",
+                              opacity:newResButtonOpacity,
+                              padding:spacing.screenSides, 
+                              }}>
+                              <TouchableOpacity 
+                              style={{
+                                alignItems:"center",
+                                backgroundColor:colors.primaryBlack,
+                                borderRadius: radii.button,
+                                flexDirection:"row",
+                                height:"100%",
+                                justifyContent:"space-between",
+                                padding:20,
+                                width:"100%",
+                                }} 
+                                onPress={handleExpandPress}
+                                >
+                                  <Text style={{fontSize:fontSizes.sm, fontWeight:"bold", color:colors.white}}>Create new resolutions</Text>
+                                  <Text style={{fontSize:fontSizes.md, fontWeight:"bold", color:colors.white}}>+</Text>
+                              </TouchableOpacity>    
+                            </Animated.View>
+
+                            : null
+                          }
+
+                          <Animated.View style={{opacity:newResFormOpacity, flex:1}}>
+                            {/* CREATE NEW RESOLUTION FORM */}
+                            <CustomForm cancelButton={false} submitButtonTitle="Create">
+                              <View style={{flex:1}}>
+                                <FormGroup label="I pledge to:">
+                                  <CustomTextInput text="hello input" />
+                                </FormGroup>
+                              </View>
+                              <View style={{flex:2}}>
+                                <FormGroup label="I'll do this every:" size="medium">
+                                    <View style={{flex:1,flexDirection:"row"}}>
+                                      <View style={{flex:1}}>
+                                        <CustomPicker items={frequency}/>
+                                      </View>
+                                      <View style={{flex:1}}>
+                                        <CustomPicker items={days}/>
+                                      </View>
+                                    </View>
+                                </FormGroup>
+                              </View>
+                            </CustomForm> 
+                            {/* END OF CREATE NEW RESOLUTION FORM */}
+                          </Animated.View>
                       
-                      <Animated.View style={{opacity:newResFormOpacity, width:100, backgroundColor:"yellow"}}>
-                        <TouchableOpacity style={{padding:50 }}onPress={handleCollapsePress}><Text>FORM</Text></TouchableOpacity>
-                      </Animated.View>
-                      </View>
-                        {/* <Mock theme={theme} screenInFocus={screenInFocus} toggleScreen={toggleScreen} currentDate={currentDate} /> */}
-                        <CalendarView screenInFocus={screenInFocus} navigation={navigation} currentDate={currentDate}/>
+                        </View>
+
+                        {
+                          newResButtonAndCalendarView.calendarView ?
+                          (<Animated.View style={{opacity:calendarViewOpacity, flex:3}}>
+                            <CalendarView navigation={navigation} currentDate={currentDate}/>
+                          </Animated.View>)
+                          :
+                            (<Text style={{fontSize:fontSizes.md, fontWeight:"bold", color:colors.white}}>Calendar</Text>)
+                        }
                       </GradientView>
-                      </>
-                    )}
+                    </>
+                  )}
                   </DatesConsumer>
               )}
             </ScreenTransitionConsumer> 

@@ -13,7 +13,7 @@ import {
 } from "../utils/dateHelpers";
 import { colors, fontSizes } from '../configStyles';
 
-export const CalendarView = ({navigation, currentDate, screenInFocus, transitionScreen}) => {
+export const CalendarView = ({navigation, currentDate, transitionScreen}) => {
 
   const getFormattedEndOfYear = (theCurrentYear) => {
     return `${theCurrentYear}-12-31`
@@ -33,9 +33,6 @@ export const CalendarView = ({navigation, currentDate, screenInFocus, transition
   const resolutionPresent = {key:'resolutionPresent', color: 'yellow'};
   const incomplete = {key:'incomplete', color: 'white'};
   const missed = {key:'missed', color: 'red'};
-
-
-    // TEST AREA
 
 const createDateMarkersAtIntervals = (startDate, endDate, interval, ...dots) => {
       let now = startDate.clone(), dates = {}
@@ -94,7 +91,7 @@ const getTheFirstDayYouNameInTheYear = (nameOfDay, startingDate) => {
 // END OF TEST AREA
 
   return(
-    <View style={{flex:4}}>
+    <View style={{flex:1}}>
     {/* { screenInFocus !== "Calendar" ? 
     (<Text styles={{color:"white", fontSize:30, fontWeight:"bold"}}>Calendar</Text>)
     : ( */}
